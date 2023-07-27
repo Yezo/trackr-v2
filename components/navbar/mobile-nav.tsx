@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/theme-toggle"
+import ExternalLinks from "@/components/navbar/external-links"
 import Logo from "@/components/typography/Logo"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,18 +9,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { HamburgerMenuIcon, GitHubLogoIcon, PlusIcon } from "@radix-ui/react-icons"
-import Link from "next/link"
+import { HamburgerMenuIcon, PlusIcon } from "@radix-ui/react-icons"
 
 export default function MobileNav() {
   return (
-    <div className="md:hidden h-14 flex items-center container justify-between border-b dark:border-gray-800 border-gray-200">
+    <div className="sm:hidden h-14 flex items-center container justify-between border-b dark:border-gray-800 border-gray-200">
       <div className="flex items-center gap-2">
         <Sheet>
-          <SheetTrigger>
-            <Button size="icon" variant="outline">
-              <HamburgerMenuIcon />
-            </Button>
+          <SheetTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-9">
+            <HamburgerMenuIcon />
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
@@ -39,16 +36,7 @@ export default function MobileNav() {
 
       <Logo>Trackr.</Logo>
 
-      <nav className="flex items-center gap-2">
-        <Link
-          href="/"
-          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 w-9"
-        >
-          <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
-        </Link>
-
-        <ModeToggle />
-      </nav>
+      <ExternalLinks />
     </div>
   )
 }
