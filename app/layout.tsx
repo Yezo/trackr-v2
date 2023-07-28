@@ -4,7 +4,7 @@ import { Inter, Spectral } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import MobileNav from "@/components/navbar/mobile-nav"
 import MainNav from "@/components/navbar/main-nav"
-
+import { Toaster } from "@/components/ui/toaster"
 export const metadata: Metadata = {
   title: "Trackr.",
   description: "A modern web application for managing your job applications",
@@ -32,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <MobileNav />
           <MainNav />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
