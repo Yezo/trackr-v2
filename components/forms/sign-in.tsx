@@ -25,6 +25,7 @@ import { useForm } from "react-hook-form"
 
 import { useState } from "react"
 import { Separator } from "@/components/ui/separator"
+import FormFieldItem from "@/components/forms/formfield-item"
 
 const formSchema = z.object({
   email: z
@@ -42,36 +43,6 @@ const formSchema = z.object({
       message: "Password must have more than 8 characters.",
     }),
 })
-
-// const formSchema = z
-//   .object({
-//     email: z
-//       .string()
-//       .min(1, {
-//         message: "Email is required.",
-//       })
-//       .email("Invalid email."),
-//     password: z
-//       .string()
-//       .min(1, {
-//         message: "Password is required.",
-//       })
-//       .min(8, {
-//         message: "Password must have more than 8 characters.",
-//       }),
-//     confirmPassword: z
-//       .string()
-//       .min(1, {
-//         message: "Password is required.",
-//       })
-//       .min(8, {
-//         message: "Password must have more than 8 characters.",
-//       }),
-//   })
-//   .refine((data) => data.password === data.confirmPassword, {
-//     message: "Passwords don't match",
-//     path: ["confirmPassword"],
-//   })
 
 export default function SignInForm() {
   const { toast } = useToast()
@@ -107,40 +78,44 @@ export default function SignInForm() {
         <DialogHeader>
           <DialogTitle>Sign in</DialogTitle>
         </DialogHeader>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="name@email.com" {...field} type="email" />
-                  </FormControl>
-                  {/* <FormDescription>This is your public display name.</FormDescription> */}
-                  <FormMessage className="dark:text-red-600" />
-                </FormItem>
+                <FormFieldItem title="Email" errorPosition="bottom">
+                  <Input
+                    placeholder="name@email.com"
+                    type="email"
+                    className="placeholder:text-xs"
+                    {...field}
+                  />
+                </FormFieldItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="********" {...field} type="password" />
-                  </FormControl>
-                  {/* <FormDescription>This is your password.</FormDescription> */}
-                  <FormMessage className="dark:text-red-600" />
-                </FormItem>
+                <FormFieldItem title="Password" errorPosition="bottom">
+                  <Input
+                    placeholder="********"
+                    type="password"
+                    className="placeholder:text-xs"
+                    {...field}
+                  />
+                </FormFieldItem>
               )}
             />
             <Button type="submit" className="min-w-full">
               Sign In
             </Button>
+
             <Separator />
+
             <DialogDescription className="flex items-center justify-center">
               Are you a new user?<Button variant="link">Create an account</Button>
             </DialogDescription>

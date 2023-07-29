@@ -32,6 +32,7 @@ import { useForm } from "react-hook-form"
 
 import { useState } from "react"
 import { Separator } from "@/components/ui/separator"
+import FormFieldItem from "@/components/forms/formfield-item"
 
 const formSchema = z.object({
   company: z.string().min(1, {
@@ -114,30 +115,18 @@ export default function AddJobForm() {
                 control={form.control}
                 name="company"
                 render={({ field }) => (
-                  <FormItem>
-                    <div className="flex gap-2 items-center min-h-[16px]">
-                      <FormLabel className="text-foreground">Company</FormLabel>
-                      <FormMessage className="dark:text-red-600 text-xs" />
-                    </div>
-                    <FormControl>
-                      <Input placeholder="Company" {...field} className="placeholder:text-xs" />
-                    </FormControl>
-                  </FormItem>
+                  <FormFieldItem title="Company" errorPosition="top">
+                    <Input placeholder="Company" {...field} className="placeholder:text-xs" />
+                  </FormFieldItem>
                 )}
               />
               <FormField
                 control={form.control}
                 name="title"
                 render={({ field }) => (
-                  <FormItem>
-                    <div className="flex gap-2 items-center min-h-[16px]">
-                      <FormLabel className="text-foreground">Job Title</FormLabel>
-                      <FormMessage className="dark:text-red-600 text-xs" />
-                    </div>
-                    <FormControl>
-                      <Input placeholder="Job Title" {...field} className="placeholder:text-xs" />
-                    </FormControl>
-                  </FormItem>
+                  <FormFieldItem title="Job Title" errorPosition="top">
+                    <Input placeholder="Job Title" {...field} className="placeholder:text-xs" />
+                  </FormFieldItem>
                 )}
               />
             </div>
@@ -145,15 +134,9 @@ export default function AddJobForm() {
               control={form.control}
               name="url"
               render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center min-h-[16px]">
-                    <FormLabel className="text-foreground">URL</FormLabel>
-                    <FormMessage className="dark:text-red-600 text-xs" />
-                  </div>
-                  <FormControl>
-                    <Input placeholder="URL" {...field} className="placeholder:text-xs" />
-                  </FormControl>
-                </FormItem>
+                <FormFieldItem title="URL" errorPosition="top">
+                  <Input placeholder="URL" {...field} className="placeholder:text-xs" />
+                </FormFieldItem>
               )}
             />
 
@@ -162,49 +145,37 @@ export default function AddJobForm() {
                 control={form.control}
                 name="remote"
                 render={({ field }) => (
-                  <FormItem className="basis-1/2">
-                    <div className="flex gap-2 items-center min-h-[16px]">
-                      <FormLabel className="text-foreground">Location</FormLabel>
-                      <FormMessage className="dark:text-red-600 text-xs" />
-                    </div>
-                    <FormControl>
-                      <Select onValueChange={field.onChange}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Remote" {...field} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Remote">Remote</SelectItem>
-                          <SelectItem value="On-site">On-site</SelectItem>
-                          <SelectItem value="Hybrid">Hybrid</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
+                  <FormFieldItem title="Remote" errorPosition="top" widthFull={true}>
+                    <Select onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Remote" {...field} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Remote">Remote</SelectItem>
+                        <SelectItem value="On-site">On-site</SelectItem>
+                        <SelectItem value="Hybrid">Hybrid</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormFieldItem>
                 )}
               />
               <FormField
                 control={form.control}
                 name="status"
                 render={({ field }) => (
-                  <FormItem className="basis-1/2">
-                    <div className="flex gap-2 items-center min-h-[16px]">
-                      <FormLabel className="text-foreground">Status</FormLabel>
-                      <FormMessage className="dark:text-red-600 text-xs" />
-                    </div>
-                    <FormControl>
-                      <Select onValueChange={field.onChange}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Pending" className="placeholder:text-xs" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Pending">Pending</SelectItem>
-                          <SelectItem value="Interview">Interview</SelectItem>
-                          <SelectItem value="Rejected">Rejected</SelectItem>
-                          <SelectItem value="Accepted">Accepted</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
+                  <FormFieldItem title="Status" errorPosition="top" widthFull={true}>
+                    <Select onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Pending" className="placeholder:text-xs" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Pending">Pending</SelectItem>
+                        <SelectItem value="Interview">Interview</SelectItem>
+                        <SelectItem value="Rejected">Rejected</SelectItem>
+                        <SelectItem value="Accepted">Accepted</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormFieldItem>
                 )}
               />
             </div>

@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -24,7 +23,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 
 import { useState } from "react"
-import { Separator } from "@/components/ui/separator"
+import FormFieldItem from "@/components/forms/formfield-item"
 
 const formSchema = z
   .object({
@@ -97,50 +96,49 @@ export default function CreateAccountForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="name@email.com" {...field} type="email" />
-                  </FormControl>
-                  <FormMessage className="dark:text-red-600 text-xs" />
-                </FormItem>
+                <FormFieldItem title="Email" errorPosition="bottom">
+                  <Input
+                    placeholder="name@email.com"
+                    type="email"
+                    className="placeholder:text-xs"
+                    {...field}
+                  />
+                </FormFieldItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Password</FormLabel>
-
-                  <FormControl>
-                    <Input placeholder="********" {...field} type="password" />
-                  </FormControl>
-                  <FormMessage className="dark:text-red-600 text-xs" />
-                </FormItem>
+                <FormFieldItem title="Password" errorPosition="bottom">
+                  <Input
+                    placeholder="********"
+                    type="password"
+                    className="placeholder:text-xs"
+                    {...field}
+                  />
+                </FormFieldItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Confirm Password</FormLabel>
-                  <FormDescription>Re-confirm your password.</FormDescription>
-                  <FormControl>
-                    <Input placeholder="********" {...field} type="password" />
-                  </FormControl>
-                  <FormMessage className="dark:text-red-600 text-xs" />
-                </FormItem>
+                <FormFieldItem title="Confirm Password" errorPosition="bottom">
+                  <Input
+                    placeholder="********"
+                    type="password"
+                    className="placeholder:text-xs"
+                    {...field}
+                  />
+                </FormFieldItem>
               )}
             />
             <Button type="submit" className="min-w-full">
               Create Account
             </Button>
-            {/* <Separator /> */}
-            {/* <DialogDescription className="flex items-center justify-center">
-              Are you a new user?<Button variant="link">Create an account</Button>
-            </DialogDescription> */}
           </form>
         </Form>
       </DialogContent>
