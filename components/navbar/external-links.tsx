@@ -41,7 +41,7 @@ export const ExternalLinks = () => {
 
   return (
     <nav className="flex items-center gap-2">
-      {status === "authenticated" ? (
+      {status !== "unauthenticated" ? (
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-2 items-center font-semibold tracking-tight capitalize text-sm">
