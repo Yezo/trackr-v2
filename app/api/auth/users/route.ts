@@ -15,6 +15,7 @@ interface NewUserResponse {
   role: string
 }
 type NewResponse = NextResponse<{ user?: NewUserResponse; error?: string }>
+
 export const POST = async (req: Request): Promise<NewResponse> => {
   const body = (await req.json()) as NewUserRequest
   await startDB()
@@ -22,7 +23,7 @@ export const POST = async (req: Request): Promise<NewResponse> => {
   if (oldUser)
     return NextResponse.json(
       {
-        error: "Email is alraedy in use!",
+        error: "Email is already in use!",
       },
       { status: 422 }
     )

@@ -4,7 +4,7 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/components/ui/use-toast"
+
 import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {
@@ -43,7 +43,6 @@ const formSchema = z.object({
 })
 
 export const CreateAccountForm = () => {
-  const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const [emailInUseError, setEmailInUseError] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,6 +56,7 @@ export const CreateAccountForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setEmailInUseError(false)
+
     const res = await fetch("api/auth/users", {
       method: "POST",
       body: JSON.stringify(values),

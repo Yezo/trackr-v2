@@ -1,6 +1,6 @@
 import startDB from "@/lib/db"
 import UserModel from "@/models/userModels"
-import NextAuth, { Awaitable, NextAuthOptions, RequestInternal, User } from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions: NextAuthOptions = {

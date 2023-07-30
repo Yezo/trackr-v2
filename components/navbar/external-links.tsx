@@ -176,11 +176,11 @@ export const ExternalLinks = () => {
           </LinkButton>
 
           <ModeToggle />
-          <LinkButton variant="secondary" href="/user/sign-in">
+          <LinkButton variant="secondary" href="/login">
             Log In
           </LinkButton>
 
-          <LinkButton href="/user/sign-up">Sign Up</LinkButton>
+          <LinkButton href="/signup">Sign Up</LinkButton>
         </>
       )}
     </nav>

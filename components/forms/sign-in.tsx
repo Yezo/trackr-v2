@@ -139,7 +139,7 @@ export const SignInForm = () => {
 
           <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
             Don't have an account?
-            <LinkButton variant="link" href="/user/sign-up">
+            <LinkButton variant="link" href="/signup">
               Sign up for free
             </LinkButton>
           </span>
