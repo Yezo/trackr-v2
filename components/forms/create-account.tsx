@@ -71,7 +71,7 @@ export const CreateAccountForm = () => {
     if (res?.user) {
       form.reset()
       form.clearErrors()
-      router.push("/")
+      router.push("/login")
     }
     //If there's an error, then display the error alert
     if (res?.error) {
