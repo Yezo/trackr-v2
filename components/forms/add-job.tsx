@@ -32,7 +32,7 @@ import { useForm } from "react-hook-form"
 
 import { useState } from "react"
 import { Separator } from "@/components/ui/separator"
-import FormFieldItem from "@/components/forms/formfield-item"
+import { FormFieldItem } from "@/components/forms/formfield-item"
 
 const formSchema = z.object({
   company: z.string().min(1, {
@@ -58,7 +58,7 @@ const formSchema = z.object({
   }),
 })
 
-export default function AddJobForm() {
+export const AddJobForm = () => {
   const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
@@ -97,7 +97,6 @@ export default function AddJobForm() {
     form.reset()
     form.clearErrors()
   }
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">

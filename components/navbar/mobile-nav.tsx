@@ -1,5 +1,5 @@
-import ExternalLinks from "@/components/navbar/external-links"
-import Logo from "@/components/typography/Logo"
+import { ExternalLinks } from "@/components/navbar/external-links"
+import { Logo } from "@/components/typography/Logo"
 
 import {
   Sheet,
@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
 
-export default function MobileNav() {
+export const MobileNav = () => {
   return (
     <div className="sm:hidden h-16 flex items-center container justify-between border-b dark:border-gray-800 border-gray-200">
       <div className="flex items-center gap-2">

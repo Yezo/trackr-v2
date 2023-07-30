@@ -1,32 +1,21 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useToast } from "@/components/ui/use-toast"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+
+import { Button } from "@/components/ui/button"
+import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
+import { Separator } from "@/components/ui/separator"
+import { LinkButton } from "@/components/ui/link-button"
+import { ExclamationTriangleIcon, EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons"
+import { FormFieldItem } from "@/components/forms/formfield-item"
 
 import { useState } from "react"
-import { Separator } from "@/components/ui/separator"
-import FormFieldItem from "@/components/forms/formfield-item"
+import { signIn } from "next-auth/react"
 
+//Zod Schema for sign in form
 const formSchema = z.object({
   email: z
     .string()
@@ -44,9 +33,11 @@ const formSchema = z.object({
     }),
 })
 
-export default function SignInForm() {
-  const { toast } = useToast()
-  const [open, setOpen] = useState(false)
+export const SignInForm = () => {
+  //States
+  const [emailInUseError, setEmailInUseError] = useState(false)
+  const [passwordVisiblity, setPasswordVisiblity] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,73 +46,105 @@ export default function SignInForm() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-      duration: 4000,
+  //Function that fires when form is submited
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    //Sets the email in use error back to false
+    setEmailInUseError(false)
+
+    const { email, password } = values
+
+    //Submission
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
     })
-    setOpen(false)
-    form.reset()
-    form.clearErrors()
+
+    //If there's no error, then reset the form and clear all form errors for the next time
+    if (res?.error === null) {
+      form.reset()
+      form.clearErrors()
+    }
+    //If there's an error, then display the error alert
+    if (res?.error) {
+      setEmailInUseError(true)
+    }
   }
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
-        Sign In
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Sign in</DialogTitle>
-        </DialogHeader>
+    <div className="min-w-full">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4 pb-6">
+            <h1 className="text-3xl font-light leading-none tracking-tight font-spectral ">
+              Welcome back,
+            </h1>
+            <p className="text-sm font-light leading-none tracking-tight font-spectral text-muted-foreground">
+              Please enter your account details below.
+            </p>
+          </div>
+          {emailInUseError && (
+            <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
+              <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
+              <span className="uppercase tracking-wider ">Wrong email or password.</span>
+            </p>
+          )}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormFieldItem title="Email" errorPosition="bottom">
+                <Input
+                  placeholder="name@email.com"
+                  type="email"
+                  className="placeholder:text-xs tracking-tight"
+                  {...field}
+                />
+              </FormFieldItem>
+            )}
+          />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormFieldItem title="Email" errorPosition="bottom">
-                  <Input
-                    placeholder="name@email.com"
-                    type="email"
-                    className="placeholder:text-xs"
-                    {...field}
-                  />
-                </FormFieldItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormFieldItem title="Password" errorPosition="bottom">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormFieldItem title="Password" errorPosition="bottom">
+                <div className="flex items-center">
                   <Input
                     placeholder="********"
-                    type="password"
-                    className="placeholder:text-xs"
+                    type={passwordVisiblity ? "text" : "password"}
+                    className="placeholder:text-xs tracking-tight"
                     {...field}
                   />
-                </FormFieldItem>
-              )}
-            />
-            <Button type="submit" className="min-w-full">
-              Sign In
-            </Button>
+                  {passwordVisiblity ? (
+                    <EyeNoneIcon
+                      className="-m-8 text-muted-foreground cursor-pointer"
+                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
+                    />
+                  ) : (
+                    <EyeOpenIcon
+                      className="-m-8 text-muted-foreground cursor-pointer"
+                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
+                    />
+                  )}
+                </div>
+              </FormFieldItem>
+            )}
+          />
 
-            <Separator />
+          <Button type="submit" className="min-w-full">
+            Sign In
+          </Button>
 
-            <DialogDescription className="flex items-center justify-center">
-              Are you a new user?<Button variant="link">Create an account</Button>
-            </DialogDescription>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+          <Separator />
+
+          <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
+            Don't have an account?
+            <LinkButton variant="link" href="/user/sign-up">
+              Sign up for free
+            </LinkButton>
+          </span>
+        </form>
+      </Form>
+    </div>
   )
 }

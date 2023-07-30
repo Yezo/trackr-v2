@@ -1,6 +1,6 @@
-import AddJobForm from "@/components/forms/add-job"
-import CreateAccountForm from "@/components/forms/create-account"
-import SignInForm from "@/components/forms/sign-in"
+import { AddJobForm } from "@/components/forms/add-job"
+import { CreateAccountForm } from "@/components/forms/create-account"
+import { SignInForm } from "@/components/forms/sign-in"
 
 export default function Home() {
   return (
