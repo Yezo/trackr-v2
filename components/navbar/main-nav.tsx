@@ -5,14 +5,9 @@ import { Logo } from "@/components/typography/Logo"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useSession } from "next-auth/react"
-import { AuthLinks } from "@/components/navbar/auth-links"
 
-type Props = {}
 export const MainNav = () => {
   const pathname = usePathname()
-  const { data, status } = useSession()
-  const isAuth = status === "authenticated"
 
   const navItems = {
     "/services": {
@@ -25,6 +20,7 @@ export const MainNav = () => {
       title: "About Us",
     },
   }
+
   return (
     <div className="hidden sm:block h-16 border-b dark:border-gray-800 border-gray-200">
       <div className="container sm:flex items-center justify-between min-h-full">

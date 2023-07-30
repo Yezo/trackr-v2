@@ -8,10 +8,11 @@ export default function SignInPage() {
         <Image
           src="/statue.webp"
           fill
-          className="object-cover rounded-xl object-right-top"
+          className="object-cover rounded-xl lg:object-right-top"
           alt="Picture of greek statue"
           quality={100}
           priority
+          sizes="(min-width: 808px) 50vw, 100vw"
         ></Image>
       </section>
       <section className="flex-1 bg-slate-100">

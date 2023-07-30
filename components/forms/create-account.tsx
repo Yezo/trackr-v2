@@ -4,19 +4,17 @@ import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
-
+import { Separator } from "@/components/ui/separator"
+import { LinkButton } from "@/components/ui/link-button"
 import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-} from "@/components/ui/dialog"
 import { FormFieldItem } from "@/components/forms/formfield-item"
-import { ExclamationTriangleIcon, UpdateIcon } from "@radix-ui/react-icons"
+import {
+  ExclamationTriangleIcon,
+  UpdateIcon,
+  EyeOpenIcon,
+  EyeNoneIcon,
+} from "@radix-ui/react-icons"
 
 import { useForm } from "react-hook-form"
 import { useState } from "react"
@@ -43,8 +41,10 @@ const formSchema = z.object({
 })
 
 export const CreateAccountForm = () => {
-  const [open, setOpen] = useState(false)
+  //States
   const [emailInUseError, setEmailInUseError] = useState(false)
+  const [passwordVisiblity, setPasswordVisiblity] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,97 +54,119 @@ export const CreateAccountForm = () => {
     },
   })
 
+  //Function that fires when form is submited
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    //Sets the email in use error back to false
     setEmailInUseError(false)
 
+    //Submission
     const res = await fetch("api/auth/users", {
       method: "POST",
       body: JSON.stringify(values),
     }).then((res) => res.json())
     console.log(res)
-    if (res.user) {
-      setOpen(false)
+
+    //If there's no error, then reset the form and clear all form errors for the next time
+    if (res?.user) {
       form.reset()
       form.clearErrors()
     }
-    if (res.error) {
+    //If there's an error, then display the error alert
+    if (res?.error) {
       setEmailInUseError(true)
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
-        Sign Up
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Sign Up</DialogTitle>
-        </DialogHeader>
-        <DialogDescription>
+    <div className="min-w-full">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4 pb-6">
+            <h1 className="text-3xl font-light leading-none tracking-tight font-spectral ">
+              Create your account,
+            </h1>
+            <p className="text-sm font-light leading-none tracking-tight font-spectral text-muted-foreground">
+              Welcome to Trackr.
+            </p>
+          </div>
           {emailInUseError && (
-            <Button
-              variant="destructive"
-              className="min-w-full text-xs flex gap-2 items-center justify-center"
-            >
+            <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
               <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
-              <span>This email is already in use.</span>
-            </Button>
+              <span className="uppercase tracking-wider ">This email is already in use.</span>
+            </p>
           )}
-        </DialogDescription>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormFieldItem title="Name" errorPosition="bottom">
-                  <Input placeholder="Name" className="placeholder:text-xs" {...field} />
-                </FormFieldItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormFieldItem title="Email" errorPosition="bottom">
-                  <Input
-                    placeholder="name@email.com"
-                    type="email"
-                    className="placeholder:text-xs"
-                    {...field}
-                  />
-                </FormFieldItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormFieldItem title="Name" errorPosition="bottom">
+                <Input placeholder="Name" className="placeholder:text-xs" {...field} />
+              </FormFieldItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormFieldItem title="Email" errorPosition="bottom">
+                <Input
+                  placeholder="name@email.com"
+                  type="email"
+                  className="placeholder:text-xs"
+                  {...field}
+                />
+              </FormFieldItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormFieldItem title="Password" errorPosition="bottom">
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormFieldItem title="Password" errorPosition="bottom">
+                <div className="flex items-center">
                   <Input
                     placeholder="********"
-                    type="password"
+                    type={passwordVisiblity ? "text" : "password"}
                     className="placeholder:text-xs"
                     {...field}
                   />
-                </FormFieldItem>
-              )}
-            />
-
-            {form.formState.isSubmitting ? (
-              <Button type="submit" className="min-w-full flex items-center gap-2" disabled>
-                <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Create Account
-              </Button>
-            ) : (
-              <Button type="submit" className="min-w-full">
-                Create Account
-              </Button>
+                  {passwordVisiblity ? (
+                    <EyeNoneIcon
+                      className="-m-8 text-muted-foreground cursor-pointer"
+                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
+                    />
+                  ) : (
+                    <EyeOpenIcon
+                      className="-m-8 text-muted-foreground cursor-pointer"
+                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
+                    />
+                  )}
+                </div>
+              </FormFieldItem>
             )}
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+          />
+
+          {form.formState.isSubmitting ? (
+            <Button type="submit" className="min-w-full flex items-center gap-2" disabled>
+              <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Create Account
+            </Button>
+          ) : (
+            <Button type="submit" className="min-w-full">
+              Create Account
+            </Button>
+          )}
+
+          <Separator />
+
+          <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
+            Already have an account?
+            <LinkButton variant="link" href="/login">
+              Log in
+            </LinkButton>
+          </span>
+        </form>
+      </Form>
+    </div>
   )
 }

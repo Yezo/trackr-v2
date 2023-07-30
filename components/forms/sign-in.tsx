@@ -23,14 +23,9 @@ const formSchema = z.object({
       message: "Email is required.",
     })
     .email("Email is invalid."),
-  password: z
-    .string()
-    .min(1, {
-      message: "Password is required.",
-    })
-    .min(8, {
-      message: "Password must have more than 8 characters.",
-    }),
+  password: z.string().min(8, {
+    message: "Password must have more than 8 characters.",
+  }),
 })
 
 export const SignInForm = () => {
@@ -79,7 +74,7 @@ export const SignInForm = () => {
               Welcome back,
             </h1>
             <p className="text-sm font-light leading-none tracking-tight font-spectral text-muted-foreground">
-              Please enter your account details below.
+              Log in with your account details below.
             </p>
           </div>
           {emailInUseError && (
@@ -140,7 +135,7 @@ export const SignInForm = () => {
           <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
             Don't have an account?
             <LinkButton variant="link" href="/signup">
-              Sign up for free
+              Sign up
             </LinkButton>
           </span>
         </form>

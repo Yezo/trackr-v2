@@ -16,7 +16,6 @@ import {
   BackpackIcon,
   CommitIcon,
 } from "@radix-ui/react-icons"
-import { useSession, signOut } from "next-auth/react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,17 +29,19 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Link from "next/link"
+
 import { useTheme } from "next-themes"
+import { useSession, signOut } from "next-auth/react"
+import Link from "next/link"
 
 export const ExternalLinks = () => {
+  //States
   const { data, status } = useSession()
-  const isAuth = status === "authenticated"
   const { theme, setTheme } = useTheme()
 
   return (
     <nav className="flex items-center gap-2">
-      {isAuth ? (
+      {status === "authenticated" ? (
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-2 items-center font-semibold tracking-tight capitalize text-sm">
@@ -176,7 +177,7 @@ export const ExternalLinks = () => {
           </LinkButton>
 
           <ModeToggle />
-          <LinkButton variant="secondary" href="/login">
+          <LinkButton variant="outline" href="/login">
             Log In
           </LinkButton>
 

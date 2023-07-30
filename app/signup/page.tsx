@@ -13,10 +13,11 @@ export default function SignUpPage() {
         <Image
           src="/door.webp"
           fill
-          className="object-cover rounded-xl object-right-top"
+          className="object-cover rounded-xl"
           alt="Picture of greek statue"
           quality={100}
           priority
+          sizes="(min-width: 808px) 50vw, 100vw"
         ></Image>
       </section>
     </div>
