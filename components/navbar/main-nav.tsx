@@ -22,7 +22,7 @@ export const MainNav = () => {
   }
 
   return (
-    <div className="hidden sm:block h-16 border-b dark:border-gray-800 border-gray-200">
+    <div className="hidden sm:block h-16 border-b ">
       <div className="container sm:flex items-center justify-between min-h-full">
         <div className="flex gap-6 items-center">
           <Logo />

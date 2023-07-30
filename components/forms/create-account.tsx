@@ -18,6 +18,7 @@ import {
 
 import { useForm } from "react-hook-form"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 //Zod Schema for sign in form
 const formSchema = z.object({
@@ -44,6 +45,7 @@ export const CreateAccountForm = () => {
   //States
   const [emailInUseError, setEmailInUseError] = useState(false)
   const [passwordVisiblity, setPasswordVisiblity] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,12 +66,12 @@ export const CreateAccountForm = () => {
       method: "POST",
       body: JSON.stringify(values),
     }).then((res) => res.json())
-    console.log(res)
 
     //If there's no error, then reset the form and clear all form errors for the next time
     if (res?.user) {
       form.reset()
       form.clearErrors()
+      router.push("/")
     }
     //If there's an error, then display the error alert
     if (res?.error) {

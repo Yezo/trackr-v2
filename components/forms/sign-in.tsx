@@ -14,6 +14,7 @@ import { FormFieldItem } from "@/components/forms/formfield-item"
 
 import { useState } from "react"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 //Zod Schema for sign in form
 const formSchema = z.object({
@@ -32,6 +33,7 @@ export const SignInForm = () => {
   //States
   const [emailInUseError, setEmailInUseError] = useState(false)
   const [passwordVisiblity, setPasswordVisiblity] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,6 +61,7 @@ export const SignInForm = () => {
     if (res?.error === null) {
       form.reset()
       form.clearErrors()
+      router.push("/profile")
     }
     //If there's an error, then display the error alert
     if (res?.error) {
