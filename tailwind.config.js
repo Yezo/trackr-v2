@@ -60,6 +60,7 @@ module.exports = {
       fontFamily: {
         inter: ["var(--font-inter)"],
         spectral: ["var(--font-spectral)"],
+        rubik: ["var(--font-rubik)"],
       },
       keyframes: {
         "accordion-down": {

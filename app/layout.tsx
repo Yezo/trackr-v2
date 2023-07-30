@@ -1,14 +1,18 @@
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter, Spectral } from "next/font/google"
+import { Inter, Spectral, Rubik } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import MobileNav from "@/components/navbar/mobile-nav"
-import MainNav from "@/components/navbar/main-nav"
+
+import { MobileNav } from "@/components/navbar/mobile-nav"
+import { MainNav } from "@/components/navbar/main-nav"
 import { Toaster } from "@/components/ui/toaster"
+import { AuthProvider } from "@/components/auth-provider"
+
 export const metadata: Metadata = {
   title: "Trackr.",
   description: "A modern web application for managing your job applications",
 }
+
 const spectral = Spectral({
   variable: "--font-spectral",
   weight: ["200", "300", "400", "500", "600"],
@@ -23,18 +27,30 @@ const inter = Inter({
   subsets: ["latin"],
 })
 
+const rubik = Rubik({
+  variable: "--font-rubik",
+  weight: ["400", "500", "600"],
+  display: "swap",
+  subsets: ["latin"],
+})
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${spectral.variable} ${inter.variable}  `}>
-      <body className="min-h-screen bg-background antialiased font-inter">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {/* Dynamically render the mobile or main navigation bars depending on viewport size */}
-          <MobileNav />
-          <MainNav />
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={`${spectral.variable} ${inter.variable} ${rubik.variable} `}
+      >
+        <body className="min-h-screen bg-background antialiased font-rubik">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <MobileNav />
+            <MainNav />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    </AuthProvider>
   )
 }
