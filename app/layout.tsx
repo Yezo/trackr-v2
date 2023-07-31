@@ -7,6 +7,7 @@ import { MobileNav } from "@/components/navbar/mobile-nav"
 import { MainNav } from "@/components/navbar/main-nav"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/components/auth-provider"
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Trackr.",
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <MobileNav />
             <MainNav />
             {children}
+            <Analytics />
             <Toaster />
           </ThemeProvider>
         </body>
