@@ -9,7 +9,12 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { Separator } from "@/components/ui/separator"
 import { LinkButton } from "@/components/ui/link-button"
-import { ExclamationTriangleIcon, EyeOpenIcon, EyeNoneIcon } from "@radix-ui/react-icons"
+import {
+  ExclamationTriangleIcon,
+  EyeOpenIcon,
+  EyeNoneIcon,
+  UpdateIcon,
+} from "@radix-ui/react-icons"
 import { FormFieldItem } from "@/components/forms/formfield-item"
 
 import { useState } from "react"
@@ -129,9 +134,15 @@ export const SignInForm = () => {
             )}
           />
 
-          <Button type="submit" className="min-w-full">
-            Sign In
-          </Button>
+          {form.formState.isSubmitting ? (
+            <Button type="submit" className="min-w-full flex items-center gap-2" disabled>
+              <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Sign In
+            </Button>
+          ) : (
+            <Button type="submit" className="min-w-full">
+              Sign In
+            </Button>
+          )}
 
           <Separator />
 

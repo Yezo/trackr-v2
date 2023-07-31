@@ -39,9 +39,13 @@ export const ExternalLinks = () => {
   const { data, status } = useSession()
   const { theme, setTheme } = useTheme()
 
+  if (status === "loading") {
+    return <></>
+  }
+
   return (
     <nav className="flex items-center gap-2">
-      {status !== "unauthenticated" ? (
+      {status === "authenticated" && (
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger className="flex gap-2 items-center font-semibold tracking-tight capitalize text-sm">
@@ -170,7 +174,8 @@ export const ExternalLinks = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      ) : (
+      )}
+      {status === "unauthenticated" && (
         <>
           <LinkButton variant="outline" size="icon" href="/" className="hidden md:inline-flex">
             <GitHubLogoIcon className="h-[1.2rem] w-[1.2rem]" />
