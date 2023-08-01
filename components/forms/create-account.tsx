@@ -67,6 +67,7 @@ export const CreateAccountForm = () => {
       body: JSON.stringify(values),
     }).then((res) => res.json())
 
+    console.log(res)
     //If there's no error, then reset the form and clear all form errors for the next time
     if (res?.user) {
       form.reset()

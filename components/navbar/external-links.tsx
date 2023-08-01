@@ -97,23 +97,27 @@ export const ExternalLinks = () => {
 
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <PersonIcon className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
+                  <Link href="/profile" className="flex items-center min-w-full">
+                    <PersonIcon className="mr-2 " />
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <BackpackIcon className="mr-2 h-4 w-4" />
-                  <span>Overview</span>
+                  <Link href="/dashboard" className="flex items-center min-w-full">
+                    <BackpackIcon className="mr-2" />
+                    <span>Dashboard</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem disabled>
-                  <PieChartIcon className="mr-2 h-4 w-4" />
+                  <PieChartIcon className="mr-2 " />
                   <span>Metrics</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem disabled>
-                  <CommitIcon className="mr-2 h-4 w-4" />
+                  <CommitIcon className="mr-2 " />
                   <span>Timeline</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem disabled>
-                  <FileIcon className="mr-2 h-4 w-4" />
+                  <FileIcon className="mr-2 " />
                   <span>Notes</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
@@ -126,13 +130,13 @@ export const ExternalLinks = () => {
                   target="_blank"
                   className="flex items-center"
                 >
-                  <PersonIcon className="mr-2 h-4 w-4" />
+                  <PersonIcon className="mr-2 " />
                   <span>GitHub</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link href="https://kvo.vercel.app/" target="_blank" className="flex items-center">
-                  <HeartIcon className="mr-2 h-4 w-4" />
+                  <HeartIcon className="mr-2 " />
                   <span>Developer</span>
                 </Link>
               </DropdownMenuItem>
@@ -142,18 +146,18 @@ export const ExternalLinks = () => {
               <DropdownMenuGroup>
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger>
-                    {theme === "light" && <SunIcon className="mr-2 h-4 w-4" />}
-                    {theme === "dark" && <MoonIcon className="mr-2 h-4 w-4" />}
+                    {theme === "light" && <SunIcon className="mr-2 " />}
+                    {theme === "dark" && <MoonIcon className="mr-2 " />}
                     <span>Theme</span>
                   </DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent>
                       <DropdownMenuItem onClick={() => setTheme("light")}>
-                        <SunIcon className="mr-2 h-4 w-4" />
+                        <SunIcon className="mr-2 " />
                         <span>Light</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        <MoonIcon className="mr-2 h-4 w-4" />
+                        <MoonIcon className="mr-2 " />
                         <span>Dark</span>
                       </DropdownMenuItem>
                     </DropdownMenuSubContent>
@@ -161,7 +165,7 @@ export const ExternalLinks = () => {
                 </DropdownMenuSub>
 
                 <DropdownMenuItem>
-                  <GearIcon className="mr-2 h-4 w-4" />
+                  <GearIcon className="mr-2 " />
                   <span>Settings</span>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
@@ -169,7 +173,7 @@ export const ExternalLinks = () => {
               <DropdownMenuSeparator />
 
               <DropdownMenuItem onClick={() => signOut()}>
-                <ExitIcon className="mr-2 h-4 w-4" /> <span>Log out</span>
+                <ExitIcon className="mr-2 " /> <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
