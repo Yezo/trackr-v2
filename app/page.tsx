@@ -1,14 +1,16 @@
 import { AddJobForm } from "@/components/forms/add-job"
-import { CreateAccountForm } from "@/components/forms/create-account"
-import { SignInForm } from "@/components/forms/sign-in"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { getServerSession } from "next-auth/next"
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions)
+
   return (
     <div className="container py-5 grid place-items-center gap-4">
       {/* <SignInForm />
-      <CreateAccountForm />
-      <AddJobForm /> */}
-      <div className="min-w-full bg-red-500 min-h-screen p-4 space-y-2">
+      <CreateAccountForm /> */}
+      {/* <AddJobForm session={session} /> */}
+      {/* <div className="min-w-full bg-red-500 min-h-screen p-4 space-y-2">
         <div className="h-12 min-w-full bg-foreground"></div>
         <div className="h-12 min-w-full bg-background"></div>
         <div className="h-12 min-w-full bg-muted"></div>
@@ -17,7 +19,7 @@ export default function Home() {
         <div className="h-12 min-w-full bg-primary-foreground"></div>
         <div className="h-12 min-w-full bg-secondary"></div>
         <div className="h-12 min-w-full bg-secondary-foreground"></div>
-      </div>
+      </div> */}
     </div>
   )
 }
