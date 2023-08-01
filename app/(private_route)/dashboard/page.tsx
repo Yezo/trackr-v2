@@ -5,7 +5,8 @@ import { getServerSession } from "next-auth/next"
 
 async function getData(id: string | undefined) {
   try {
-    const fetchedUsers = await fetch(`http://trackr-v2.vercel.app/api/job/${id}`, {
+    // const fetchedUsers = await fetch(`${process.env.LIVE_URL}/api/job/${id}`, {
+    const fetchedUsers = await fetch(`${process.env.LOCAL_URL}/api/job/${id}`, {
       cache: "no-store",
     }).then((res) => res.json())
     console.log(fetchedUsers)
