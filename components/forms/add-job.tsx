@@ -20,30 +20,54 @@ import { useForm } from "react-hook-form"
 import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { Session } from "next-auth"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 //Zod Schema for sign in form
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required.",
+  company: z.string().min(1, {
+    message: "Company is required.",
   }),
-  email: z
+  jobTitle: z.string().min(1, {
+    message: "Job Title is required.",
+  }),
+  link: z
     .string()
     .min(1, {
-      message: "Email is required.",
+      message: "URL is required.",
     })
-    .email("Email is invalid."),
-  password: z.string().min(1, {
-    message: "Password is required.",
+    .url({ message: "(Invalid URL)" }),
+  remote: z.string().min(1, {
+    message: "* required.",
   }),
-  munkie: z.string().min(1, {
+  status: z.string().min(1, {
+    message: "* required.",
+  }),
+  notes: z.string().min(0, {
+    message: "* required.",
+  }),
+  userID: z.string().min(1, {
     message: "Password is required.",
   }),
 })
 
 export const AddJobForm = ({ session }: { session: Session | null }) => {
   //States
-  const [emailInUseError, setEmailInUseError] = useState(false)
-  const [passwordVisiblity, setPasswordVisiblity] = useState(false)
+  const [submissionError, setSubmissionError] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
   const router = useRouter()
   const userId = (session && session.user && (session?.user.id as string)) ?? ""
   const [isPending, startTransition] = useTransition()
@@ -51,17 +75,20 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      munkie: userId,
+      company: "",
+      jobTitle: "",
+      link: "",
+      remote: "Remote",
+      status: "Pending",
+      notes: "",
+      userID: userId,
     },
   })
 
   //Function that fires when form is submited
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     //Sets the email in use error back to false
-    setEmailInUseError(false)
+    setSubmissionError(false)
 
     //Submission
     const res = await fetch("api/auth/jobs", {
@@ -71,6 +98,7 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
 
     //If there's no error, then reset the form and clear all form errors for the next time
     if (res?.user) {
+      setOpenDialog(false)
       form.reset()
       form.clearErrors()
       startTransition(() => {
@@ -81,103 +109,158 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
     }
     //If there's an error, then display the error alert
     if (res?.error) {
-      setEmailInUseError(true)
+      setSubmissionError(true)
     }
+  }
+
+  const handleDiscard = () => {
+    //For when the user clicks the discard button
+    //Then close dialog + reset form fields and errors
+    setOpenDialog(false)
+    form.reset()
+    form.clearErrors()
+  }
+
+  const handleSoftClose = () => {
+    //For when the user clicks outside
+    //For when the user clicks the X button
+    //Then close dialog + reset form fields and errors
+    setOpenDialog(!openDialog)
+    form.reset()
+    form.clearErrors()
   }
 
   return (
     <div className="min-w-full">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4 pb-6">
-            <h1 className="text-3xl font-light leading-none tracking-tight font-spectral ">
-              Create your account,
-            </h1>
-            <p className="text-sm font-light leading-none tracking-tight font-spectral text-muted-foreground">
-              Welcome to Trackr.
-            </p>
-          </div>
-          {emailInUseError && (
-            <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
-              <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
-              <span className="uppercase tracking-wider ">This email is already in use.</span>
-            </p>
-          )}
+      <Dialog open={openDialog} onOpenChange={handleSoftClose}>
+        <DialogTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+          Add Job
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="mb-2">Add A Job Application</DialogTitle>
+            <Separator />
+          </DialogHeader>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+              {submissionError && (
+                <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
+                  <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
+                  <span className="uppercase tracking-wider ">
+                    There was an error submitting the form.
+                  </span>
+                </p>
+              )}
 
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormFieldItem title="Name" errorPosition="bottom">
-                <Input placeholder="Name" className="placeholder:text-xs" {...field} />
-              </FormFieldItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormFieldItem title="Email" errorPosition="bottom">
-                <Input
-                  placeholder="name@email.com"
-                  type="email"
-                  className="placeholder:text-xs"
-                  {...field}
-                />
-              </FormFieldItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormFieldItem title="Password" errorPosition="bottom">
-                <div className="flex items-center">
-                  <Input
-                    placeholder="********"
-                    type={passwordVisiblity ? "text" : "password"}
-                    className="placeholder:text-xs"
-                    {...field}
-                  />
-                  {passwordVisiblity ? (
-                    <EyeNoneIcon
-                      className="-m-8 text-muted-foreground cursor-pointer"
-                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
-                    />
-                  ) : (
-                    <EyeOpenIcon
-                      className="-m-8 text-muted-foreground cursor-pointer"
-                      onClick={() => setPasswordVisiblity(!passwordVisiblity)}
-                    />
+              <div className="flex items-center gap-4 justify-between">
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormFieldItem title="Company" errorPosition="bottom">
+                      <Input placeholder="Company" className="placeholder:text-xs" {...field} />
+                    </FormFieldItem>
                   )}
-                </div>
-              </FormFieldItem>
-            )}
-          />
+                />
 
-          {/* <FormField control={form.control} name="unique" render={({ field }) => <></>} /> */}
+                <FormField
+                  control={form.control}
+                  name="jobTitle"
+                  render={({ field }) => (
+                    <FormFieldItem title="Job Title" errorPosition="bottom">
+                      <Input placeholder="Job Title" className="placeholder:text-xs" {...field} />
+                    </FormFieldItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="link"
+                render={({ field }) => (
+                  <FormFieldItem title="URL" errorPosition="bottom">
+                    <Input placeholder="URL" className="placeholder:text-xs" {...field} />
+                  </FormFieldItem>
+                )}
+              />
+              <div className="flex items-center gap-4 justify-between">
+                <FormField
+                  control={form.control}
+                  name="remote"
+                  render={({ field }) => (
+                    <FormFieldItem title="Remote" errorPosition="top" widthFull={true}>
+                      <Select onValueChange={field.onChange}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Remote" {...field} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Remote">Remote</SelectItem>
+                          <SelectItem value="On-site">On-site</SelectItem>
+                          <SelectItem value="Hybrid">Hybrid</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormFieldItem>
+                  )}
+                />
 
-          {form.formState.isSubmitting ? (
-            <Button type="submit" className="min-w-full flex items-center gap-2" disabled>
-              <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Create Account
-            </Button>
-          ) : (
-            <Button type="submit" className="min-w-full">
-              Create Account
-            </Button>
-          )}
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormFieldItem title="Status" errorPosition="top" widthFull={true}>
+                      <Select onValueChange={field.onChange}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Pending" className="placeholder:text-xs" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Pending">Pending</SelectItem>
+                          <SelectItem value="Interview">Interview</SelectItem>
+                          <SelectItem value="Rejected">Rejected</SelectItem>
+                          <SelectItem value="Accepted">Accepted</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormFieldItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="notes"
+                render={({ field }) => (
+                  <FormFieldItem title="Notes" errorPosition="top" widthFull={true}>
+                    <Textarea
+                      placeholder="Jot down notes like the company's mission and values."
+                      className="resize-none placeholder:text-xs"
+                      {...field}
+                    />
+                  </FormFieldItem>
+                )}
+              />
 
-          <Separator />
+              <Separator />
 
-          <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
-            Already have an account?
-            <LinkButton variant="link" href="/login">
-              Log in
-            </LinkButton>
-          </span>
-        </form>
-      </Form>
+              <div className="flex gap-4 justify-end">
+                <Button
+                  variant="secondary"
+                  type="button"
+                  className="basis-1/2"
+                  onClick={handleDiscard}
+                >
+                  Discard
+                </Button>
+                {form.formState.isSubmitting ? (
+                  <Button type="submit" className="basis-1/2 flex items-center gap-2" disabled>
+                    <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Add
+                  </Button>
+                ) : (
+                  <Button type="submit" className="basis-1/2 flex items-center gap-2">
+                    Add
+                  </Button>
+                )}
+              </div>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

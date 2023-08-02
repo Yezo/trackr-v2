@@ -3,17 +3,19 @@ import { AddJobForm } from "@/components/forms/add-job"
 import { Session } from "next-auth"
 
 export interface IData {
-  fetchedUsers: FetchedUser[]
+  fetchedJobApplications: FetchedJobApplications[]
 }
 
-export interface FetchedUser {
+export interface FetchedJobApplications {
   _id: string
-  email: string
-  name: string
-  password: string
-  role: "user" | "admin"
-  munkie: string
   __v: number
+  company: string
+  jobTitle: string
+  link: string
+  remote: "Remote" | "On-site" | "Hybrid"
+  status: "Pending" | "Interview" | "Rejected" | "Accepted"
+  notes: string
+  userID: string
 }
 
 type Props = {
@@ -25,9 +27,9 @@ export const JobDataTable = ({ session, data }: Props) => {
 
   return (
     <div>
-      {JSON.stringify(data)}
-      {data.fetchedUsers.map((item) => (
-        <div>{item.email}</div>
+      {/* {JSON.stringify(data)} */}
+      {data.fetchedJobApplications.map((item) => (
+        <div className="p-1 bg-slate-600 rounded-md grid place-items-center">{item.company}</div>
       ))}
       <AddJobForm session={session} />
       {/* {session && session.user && session?.user.id} */}

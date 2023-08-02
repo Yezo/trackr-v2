@@ -3,18 +3,24 @@ import JobModel from "@/models/jobModel"
 import { NextResponse } from "next/server"
 
 interface NewUserRequest {
-  name: string
-  email: string
-  password: string
-  munkie: string
+  userID: string
+  company: string
+  jobTitle: string
+  link: string
+  remote: string
+  status: string
+  notes: string
 }
 
 export interface NewUserResponse {
   id: string
-  name: string
-  email: string
-  role: string
-  munkie: string
+  userID: string
+  company: string
+  jobTitle: string
+  link: string
+  remote: string
+  status: string
+  notes: string
 }
 type NewResponse = NextResponse<{ user?: NewUserResponse; error?: string }>
 
@@ -25,11 +31,14 @@ export const POST = async (req: Request): Promise<NewResponse> => {
 
   return NextResponse.json({
     user: {
-      munkie: user.munkie,
-      id: user.name,
-      email: user.email,
-      name: user.name,
-      role: user.role,
+      userID: user.userID,
+      id: user.company,
+      company: user.company,
+      jobTitle: user.jobTitle,
+      link: user.link,
+      remote: user.remote,
+      status: user.status,
+      notes: user.notes,
     },
   })
 }
