@@ -21,6 +21,8 @@ export interface NewUserResponse {
   remote: string
   status: string
   notes: string
+  createdAt: Date
+  updatedAt: Date
 }
 type NewResponse = NextResponse<{ user?: NewUserResponse; error?: string }>
 
@@ -39,6 +41,8 @@ export const POST = async (req: Request): Promise<NewResponse> => {
       remote: user.remote,
       status: user.status,
       notes: user.notes,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     },
   })
 }
