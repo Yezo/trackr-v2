@@ -15,6 +15,7 @@ import {
   PieChartIcon,
   BackpackIcon,
   CommitIcon,
+  AvatarIcon,
 } from "@radix-ui/react-icons"
 
 import SidebarLink from "@/components/navbar/sidebar/sidebar-link"
@@ -64,28 +65,13 @@ export default function Sidebar({ session }: Props) {
   const userName = session?.user?.name
   const userImage = session?.user?.image
   return (
-    <aside className="min-h-[calc(100vh-64px)] max-w-[250px] space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700 flex flex-col justify-between">
+    <aside className="flex min-h-[calc(100vh-64px)] max-w-[250px] flex-col justify-between space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700">
       <div className="space-y-4">
         <Link
           href="/user/profile"
-          className="flex gap-2 items-center  font-semibold tracking-tight capitalize text-sm px-7"
+          className="flex items-center gap-2  px-7 text-sm font-semibold capitalize tracking-tight"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-user-circle-2"
-          >
-            <path d="M18 20a6 6 0 0 0-12 0" />
-            <circle cx="12" cy="10" r="4" />
-            <circle cx="12" cy="12" r="10" />
-          </svg>
+          <AvatarIcon className="h-8 w-8" />
           {userName}
         </Link>
         <nav className="px-3 py-2">

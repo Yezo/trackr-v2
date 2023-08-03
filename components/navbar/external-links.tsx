@@ -15,6 +15,7 @@ import {
   PieChartIcon,
   BackpackIcon,
   CommitIcon,
+  AvatarIcon,
 } from "@radix-ui/react-icons"
 import {
   DropdownMenu,
@@ -48,47 +49,17 @@ export const ExternalLinks = () => {
       {status === "authenticated" && (
         <div className="flex items-center gap-2">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex gap-2 items-center font-semibold tracking-tight capitalize text-sm">
+            <DropdownMenuTrigger className="flex items-center gap-2 text-sm font-semibold capitalize tracking-tight">
               <div className="rounded-full ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-user-circle-2"
-                >
-                  <path d="M18 20a6 6 0 0 0-12 0" />
-                  <circle cx="12" cy="10" r="4" />
-                  <circle cx="12" cy="12" r="10" />
-                </svg>
+                <AvatarIcon className="h-6 w-6" />
               </div>
               {/* {data?.user?.name}  */}
               <ChevronDownIcon />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[165px]" alignOffset={0}>
-              <DropdownMenuLabel className="flex gap-2 items-center  font-semibold tracking-tight capitalize text-sm">
+              <DropdownMenuLabel className="flex items-center gap-2  text-sm font-semibold capitalize tracking-tight">
                 <Link href="/user/profile" className="rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-user-circle-2"
-                  >
-                    <path d="M18 20a6 6 0 0 0-12 0" />
-                    <circle cx="12" cy="10" r="4" />
-                    <circle cx="12" cy="12" r="10" />
-                  </svg>
+                  <AvatarIcon className="h-8 w-8" />
                 </Link>
                 {data?.user?.name}
               </DropdownMenuLabel>
@@ -97,13 +68,13 @@ export const ExternalLinks = () => {
 
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <Link href="/profile" className="flex items-center min-w-full">
+                  <Link href="/profile" className="flex min-w-full items-center">
                     <PersonIcon className="mr-2 " />
                     <span>Profile</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/dashboard" className="flex items-center min-w-full">
+                  <Link href="/dashboard" className="flex min-w-full items-center">
                     <BackpackIcon className="mr-2" />
                     <span>Dashboard</span>
                   </Link>
