@@ -30,7 +30,7 @@ const inter = Inter({
 
 const rubik = Rubik({
   variable: "--font-rubik",
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
   subsets: ["latin"],
 })
