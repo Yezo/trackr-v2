@@ -8,6 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons"
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -48,7 +54,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to first page</span>
-            {/* <ChevronsLeft className="h-4 w-4" /> */}
+            <DoubleArrowLeftIcon className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
@@ -57,7 +63,8 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to previous page</span>
-            {/* <ChevronLeft className="h-4 w-4" /> */}
+
+            <ChevronLeftIcon className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
@@ -66,7 +73,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to next page</span>
-            {/* <ChevronRight className="h-4 w-4" /> */}
+            <ChevronRightIcon className="h-4 w-4" />
           </Button>
           <Button
             variant="outline"
@@ -75,7 +82,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to last page</span>
-            {/* <ChevronsRight className="h-4 w-4" /> */}
+            <DoubleArrowRightIcon className="h-4 w-4" />
           </Button>
         </div>
       </div>
