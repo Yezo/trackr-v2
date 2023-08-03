@@ -5,15 +5,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { LinkButton } from "@/components/ui/link-button"
 import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { FormFieldItem } from "@/components/forms/formfield-item"
 import {
   ExclamationTriangleIcon,
   UpdateIcon,
-  EyeOpenIcon,
-  EyeNoneIcon,
+  Pencil2Icon,
+  PlusIcon,
+  PlusCircledIcon,
 } from "@radix-ui/react-icons"
 
 import { useForm } from "react-hook-form"
@@ -131,9 +131,10 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
   }
 
   return (
-    <div className="min-w-full">
+    <div className="">
       <Dialog open={openDialog} onOpenChange={handleSoftClose}>
-        <DialogTrigger className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+        <DialogTrigger className="inline-flex gap-2 items-center justify-center rounded-full text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+          <PlusCircledIcon />
           Add Job
         </DialogTrigger>
         <DialogContent>
