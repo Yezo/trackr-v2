@@ -62,8 +62,9 @@ export function DataTable<TData, TValue>({
   console.log(data)
 
   return (
-    <div className="">
-      <div className="flex justify-between items-center px-4">
+    // <div className="w-[345px] rounded-xl border p-4 min-[425px]:max-w-[415px] min-[500px]:max-w-[485px]  md:block md:min-w-full">
+    <div className="max-xl:max-w-[675px] max-lg:max-w-[510px] max-md:max-w-[345px] max-sm:max-w-[345px]">
+      <div className="flex items-center justify-between">
         <DataTableInputFilter table={table} />
         <div className="flex items-center gap-2">
           <AddJobForm session={session} />

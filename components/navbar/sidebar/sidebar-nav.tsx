@@ -63,9 +63,9 @@ const accountNavItems = {
 export default function Sidebar({ session }: Props) {
   let pathname = usePathname() || "/"
   const userName = session?.user?.name
-  const userImage = session?.user?.image
+
   return (
-    <aside className="flex min-h-[calc(100vh-64px)] max-w-[250px] flex-col justify-between space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700">
+    <aside className="hidden min-h-[calc(100vh-64px)] max-w-[250px] flex-col justify-between space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700 sm:flex ">
       <div className="space-y-4">
         <Link
           href="/user/profile"

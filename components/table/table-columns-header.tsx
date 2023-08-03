@@ -7,11 +7,11 @@ type Props = {
 }
 export const TableColumnHeaderItem = ({ children, column }: Props) => {
   return (
-    <span
-      className="flex items-center gap-2 cursor-pointer hover:bg-primary/5 py-2 px-4 min-w-full transition-colors hover:text-secondary-foreground my-1 rounded"
+    <div
+      className="flex min-w-full cursor-pointer items-center gap-2 rounded px-4 py-2 transition-colors hover:bg-primary/5 hover:text-secondary-foreground"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
     >
       {children}
-    </span>
+    </div>
   )
 }

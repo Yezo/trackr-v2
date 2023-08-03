@@ -4,24 +4,24 @@ type Props = {
 export const TableColumnCellBoxItem = ({ children }: Props) => {
   if (children === "Remote") {
     return (
-      <span className="rounded-sm bg-red-500 px-4 py-1 text-xs uppercase tracking-widest">
+      <div className="ml-4 min-w-[90px] max-w-fit rounded-full bg-red-500 py-0.5 text-center text-[0.65rem] uppercase tracking-widest">
         {children}
-      </span>
+      </div>
     )
   }
   if (children === "Hybrid") {
     return (
-      <span className="rounded-sm bg-blue-500 px-4 py-1 text-xs uppercase tracking-widest">
+      <div className="ml-4 min-w-[90px] max-w-fit rounded-full bg-blue-500 py-0.5 text-center text-[0.65rem] uppercase tracking-widest">
         {children}
-      </span>
+      </div>
     )
   }
   if (children === "On-site") {
     return (
-      <span className="rounded-sm bg-purple-500 px-4 py-1 text-xs uppercase tracking-widest">
+      <div className="ml-4 min-w-[90px] max-w-fit rounded-full bg-purple-500 py-0.5 text-center text-[0.65rem] uppercase tracking-widest">
         {children}
-      </span>
+      </div>
     )
   }
-  return <span className="px-4 ">{children}</span>
+  return <div className="px-4 ">{children}</div>
 }

@@ -7,7 +7,7 @@ interface DataTableHeaderBar<TData> {
 
 export default function DataTableInputFilter<TData>({ table }: DataTableHeaderBar<TData>) {
   return (
-    <div className="flex items-center py-4">
+    <div className="hidden items-center py-4 sm:flex">
       <Input
         placeholder="Filter companies..."
         value={(table.getColumn("company")?.getFilterValue() as string) ?? ""}

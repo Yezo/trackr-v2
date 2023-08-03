@@ -1,12 +1,20 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { CaretSortIcon } from "@radix-ui/react-icons"
+import { CaretSortIcon, DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { TableColumnHeaderItem } from "@/components/table/table-columns-header"
 import { TableColumnCellItem } from "@/components/table/table-columns-cell"
 import { TableColumnCellBoxItem } from "@/components/table/table-columns-cellbox"
 import Link from "next/link"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -147,11 +155,8 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
     },
     cell: ({ row }) => {
       const createdAt: Date = row.original.createdAt
-      return (
-        <TableColumnCellItem>
-          {createdAt.toString().slice(0, 10)}
-        </TableColumnCellItem>
-      )
+      return <TableColumnCellItem>{createdAt.toString().slice(0, 10)}</TableColumnCellItem>
+      return <div className="max-w-[100px]">{createdAt.toString().slice(0, 10)}</div>
     },
   },
   {
@@ -166,10 +171,33 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
     },
     cell: ({ row }) => {
       const updatedAt: Date = row.original.updatedAt
+      return <TableColumnCellItem>{updatedAt.toString().slice(0, 10)}</TableColumnCellItem>
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const payment = row.original.userID
+
       return (
-        <TableColumnCellItem>
-          {updatedAt.toString().slice(0, 10)}
-        </TableColumnCellItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+
+              <DotsHorizontalIcon className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment)}>
+              Copy payment ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )
     },
   },
