@@ -5,7 +5,14 @@ import { columns } from "@/components/table/table-columns"
 import { DataTable } from "@/components/table/data-table"
 import { getServerSession } from "next-auth/next"
 import { CardComponent } from "@/components/card/card"
-import { ChatBubbleIcon, ClockIcon, GlobeIcon, ScissorsIcon } from "@radix-ui/react-icons"
+import {
+  ChatBubbleIcon,
+  ClockIcon,
+  EnvelopeOpenIcon,
+  GlobeIcon,
+  ScissorsIcon,
+} from "@radix-ui/react-icons"
+import { AddJobForm } from "@/components/forms/add-job"
 
 async function getData(id: string | undefined) {
   try {
@@ -44,9 +51,9 @@ export default async function DashboardPage() {
   return (
     <div className="flex">
       <Sidebar session={session} />
-      <section className="flex-1 px-4 py-8 md:px-16">
+      <section className="container mx-auto flex-1 space-y-8 px-4 py-8 md:px-32">
         <div>
-          <div className=" space-y-4 pb-8">
+          <div className="space-y-4">
             <h2 className="space-x-2 text-xs font-light">
               <span className="text-muted-foreground">Home</span> <span>/</span>
               <span>Dashboard</span>
@@ -55,7 +62,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-1 pb-8 ">
+        {/* <div className="flex flex-wrap gap-1">
           <CardComponent
             title={"Applications"}
             description={"Every single one of them so far "}
@@ -84,8 +91,20 @@ export default async function DashboardPage() {
             currentNumber={filteredRejected.length}
             totalNumber={data.fetchedJobApplications.length}
           />
-        </div>
-        <DataTable columns={columns} data={data.fetchedJobApplications} session={session} />
+        </div> */}
+        {data.fetchedJobApplications.length >= 1 ? (
+          <DataTable columns={columns} data={data.fetchedJobApplications} session={session} />
+        ) : (
+          <div className="grid min-h-[730px] w-full place-items-center rounded-xl border p-4">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <EnvelopeOpenIcon className="h-5 w-5" />
+              <p className="max-w-[230px] text-center text-sm">
+                It appears you haven't uploaded any applications yet.
+              </p>
+              <AddJobForm session={session} />
+            </div>
+          </div>
+        )}
       </section>
     </div>
   )
