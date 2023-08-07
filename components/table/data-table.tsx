@@ -21,13 +21,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import DataTableInputFilter from "@/components/table/table-input-filter"
 import DataTableColumnVisibility from "@/components/table/table-visibility"
 import { Button } from "@/components/ui/button"
 import { DataTablePagination } from "@/components/table/table-pagination"
 import { Session } from "next-auth"
 import { AddJobForm } from "@/components/forms/add-job"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -63,51 +64,53 @@ export function DataTable<TData, TValue>({
 
   return (
     // <div className="w-[345px] rounded-xl border p-4 min-[425px]:max-w-[415px] min-[500px]:max-w-[485px]  md:block md:min-w-full">
-    <div className="max-xl:max-w-[675px] max-lg:max-w-[510px] max-md:max-w-[345px] max-sm:max-w-[345px]">
-      <div className="flex items-center justify-between">
-        <DataTableInputFilter table={table} />
-        <div className="flex items-center gap-2">
-          <AddJobForm session={session} />
-          <DataTableColumnVisibility table={table} />
+    // <div className="justify-between rounded-xl border p-4 max-xl:max-w-[675px] max-lg:max-w-[510px] max-md:max-w-[345px] max-sm:max-w-[345px] xl:flex xl:min-h-[530px] xl:flex-col"></div>
+    <div className="flex min-h-[730px] flex-col justify-between rounded-xl border p-4">
+      <div>
+        <div className="flex items-center justify-between pb-8">
+          <DataTableInputFilter table={table} />
+          <div className="flex items-center gap-2">
+            <AddJobForm session={session} />
+            <DataTableColumnVisibility table={table} />
+          </div>
         </div>
-      </div>
-
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                )
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
+                  )
+                })}
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <DataTablePagination table={table} />
       </div>

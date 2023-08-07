@@ -65,7 +65,7 @@ export default function Sidebar({ session }: Props) {
   const userName = session?.user?.name
 
   return (
-    <aside className="hidden min-h-[calc(100vh-64px)] max-w-[250px] flex-col justify-between space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700 sm:flex ">
+    <aside className="hidden h-[calc(100vh-64px)] max-w-[250px] flex-col justify-between space-y-4 divide-y divide-gray-200 border-r py-8 dark:divide-gray-700  ">
       <div className="space-y-4">
         <Link
           href="/user/profile"

@@ -80,21 +80,21 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
     },
   },
 
-  {
-    accessorKey: "link",
-    header: ({ column }) => {
-      return (
-        <TableColumnHeaderItem column={column}>
-          Link
-          <CaretSortIcon className="h-4 w-4" />
-        </TableColumnHeaderItem>
-      )
-    },
-    cell: ({ row }) => {
-      const link: string = row.original.link
-      return <TableColumnCellItem>{link}</TableColumnCellItem>
-    },
-  },
+  // {
+  //   accessorKey: "link",
+  //   header: ({ column }) => {
+  //     return (
+  //       <TableColumnHeaderItem column={column}>
+  //         Link
+  //         <CaretSortIcon className="h-4 w-4" />
+  //       </TableColumnHeaderItem>
+  //     )
+  //   },
+  //   cell: ({ row }) => {
+  //     const link: string = row.original.link
+  //     return <TableColumnCellItem>{link}</TableColumnCellItem>
+  //   },
+  // },
 
   {
     accessorKey: "remote",
@@ -116,39 +116,42 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
     accessorKey: "status",
     header: ({ column }) => {
       return (
-        <TableColumnHeaderItem column={column}>
+        <div
+          className="flex min-w-[155px] max-w-[155px] cursor-pointer items-center gap-2 rounded px-4 py-2 transition-colors hover:bg-primary/5 hover:text-secondary-foreground"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
           Status
           <CaretSortIcon className="h-4 w-4" />
-        </TableColumnHeaderItem>
+        </div>
       )
     },
     cell: ({ row }) => {
       const status: string = row.original.status
-      return <TableColumnCellItem>{status}</TableColumnCellItem>
+      return <TableColumnCellBoxItem>{status}</TableColumnCellBoxItem>
     },
   },
 
-  {
-    accessorKey: "notes",
-    header: ({ column }) => {
-      return (
-        <TableColumnHeaderItem column={column}>
-          Notes
-          <CaretSortIcon className="h-4 w-4" />
-        </TableColumnHeaderItem>
-      )
-    },
-    cell: ({ row }) => {
-      const notes: string = row.original.notes
-      return <TableColumnCellItem>{notes}</TableColumnCellItem>
-    },
-  },
+  // {
+  //   accessorKey: "notes",
+  //   header: ({ column }) => {
+  //     return (
+  //       <TableColumnHeaderItem column={column}>
+  //         Notes
+  //         <CaretSortIcon className="h-4 w-4" />
+  //       </TableColumnHeaderItem>
+  //     )
+  //   },
+  //   cell: ({ row }) => {
+  //     const notes: string = row.original.notes
+  //     return <TableColumnCellItem>{notes}</TableColumnCellItem>
+  //   },
+  // },
   {
     accessorKey: "createdAt",
     header: ({ column }) => {
       return (
         <TableColumnHeaderItem column={column}>
-          Created
+          Added On
           <CaretSortIcon className="h-4 w-4" />
         </TableColumnHeaderItem>
       )
@@ -159,23 +162,17 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
       return <div className="max-w-[100px]">{createdAt.toString().slice(0, 10)}</div>
     },
   },
+
   {
-    accessorKey: "updatedAt",
+    id: "actions",
     header: ({ column }) => {
       return (
         <TableColumnHeaderItem column={column}>
-          Updated
+          Action
           <CaretSortIcon className="h-4 w-4" />
         </TableColumnHeaderItem>
       )
     },
-    cell: ({ row }) => {
-      const updatedAt: Date = row.original.updatedAt
-      return <TableColumnCellItem>{updatedAt.toString().slice(0, 10)}</TableColumnCellItem>
-    },
-  },
-  {
-    id: "actions",
     cell: ({ row }) => {
       const payment = row.original.userID
 
