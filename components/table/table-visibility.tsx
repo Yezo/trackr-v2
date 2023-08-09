@@ -28,6 +28,7 @@ export default function DataTableColumnVisibility<TData>({ table }: DataTableHea
         {table
           .getAllColumns()
           .filter((column) => column.getCanHide())
+          .filter((column) => column.id.toLowerCase() !== "actions")
           .map((column) => {
             return (
               <DropdownMenuCheckboxItem
