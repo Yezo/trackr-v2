@@ -16,12 +16,11 @@ import { AddJobForm } from "@/components/forms/add-job"
 
 async function getData(id: string | undefined) {
   try {
-    // const fetchedUsers = await fetch(`${process.env.LIVE_URL}/api/job/${id}`, {
-    const fetchedUsers = await fetch(`${process.env.LOCAL_URL}/api/job/${id}`, {
+    // const data = await fetch(`${process.env.LIVE_URL}/api/job/${id}`, {
+    const data = await fetch(`${process.env.LOCAL_URL}/api/job/${id}`, {
       cache: "no-store",
     }).then((res) => res.json())
-
-    return fetchedUsers
+    return data
   } catch (error) {
     console.log(error)
   }
@@ -93,7 +92,9 @@ export default async function DashboardPage() {
           />
         </div> */}
         {data.fetchedJobApplications.length >= 1 ? (
-          <DataTable columns={columns} data={data.fetchedJobApplications} session={session} />
+          <>
+            <DataTable columns={columns} data={data.fetchedJobApplications} session={session} />
+          </>
         ) : (
           <div className="grid min-h-[730px] w-full place-items-center rounded-xl border p-4">
             <div className="flex flex-col items-center justify-center gap-2">

@@ -83,6 +83,12 @@ export const MainNav = () => {
     },
   ]
 
+  //!TODO
+  //add highlighting if its same path
+  //add more individual inks
+  // add NEW/DISABLED badges next to titles
+  // add protected conditional route for dashboard for users only
+
   return (
     <div className="hidden h-16 border-b sm:block ">
       <div className="container min-h-full items-center justify-between sm:flex">

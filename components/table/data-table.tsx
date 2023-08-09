@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   })
-  console.log(data)
+  // console.log(data)
 
   return (
     // <div className="w-[345px] rounded-xl border p-4 min-[425px]:max-w-[415px] min-[500px]:max-w-[485px]  md:block md:min-w-full">

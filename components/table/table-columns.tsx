@@ -15,6 +15,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { EditJobForm } from "@/components/forms/edit-job"
+import TableActions from "@/components/table/table-actions"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -162,6 +164,21 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
       return <div className="max-w-[100px]">{createdAt.toString().slice(0, 10)}</div>
     },
   },
+  // {
+  //   accessorKey: "createdAt",
+  //   header: ({ column }) => {
+  //     return (
+  //       <TableColumnHeaderItem column={column}>
+  //         Test
+  //         <CaretSortIcon className="h-4 w-4" />
+  //       </TableColumnHeaderItem>
+  //     )
+  //   },
+  //   cell: ({ row }) => {
+  //     const payment = row.original.userID
+  //     return <EditJobForm user={payment} />
+  //   },
+  // },
 
   {
     id: "actions",
@@ -174,28 +191,9 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
       )
     },
     cell: ({ row }) => {
-      const payment = row.original.userID
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment)}>
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      const userID = row.original.userID
+      const jobID = row.original._id
+      return <TableActions userID={userID} jobID={jobID} />
     },
   },
 ]
