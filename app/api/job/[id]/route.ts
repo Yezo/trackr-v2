@@ -51,6 +51,15 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   //ID of session user
   const id = params.id
 
+  //https://codevoweb.com/setup-and-use-mongodb-in-nextjs-13-app-directory/
+  function stringToObjectId(id: string): mongoose.Types.ObjectId | null {
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      return new mongoose.Types.ObjectId(id)
+    } else {
+      return null
+    }
+  }
+
   try {
     //Start the DB connection
     await startDB()
@@ -73,14 +82,5 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     }
   } catch (error) {
     return NextResponse.json("There was an error")
-  }
-}
-
-//https://codevoweb.com/setup-and-use-mongodb-in-nextjs-13-app-directory/
-export function stringToObjectId(id: string): mongoose.Types.ObjectId | null {
-  if (mongoose.Types.ObjectId.isValid(id)) {
-    return new mongoose.Types.ObjectId(id)
-  } else {
-    return null
   }
 }
