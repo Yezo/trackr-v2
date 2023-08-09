@@ -39,6 +39,7 @@ export default function TableActions({ userID, jobID }: Props) {
           // losing client-side browser or React state.
           router.refresh()
         })
+        setDropdownOpen(false)
       } else {
         throw "There was an error during deletion."
       }
