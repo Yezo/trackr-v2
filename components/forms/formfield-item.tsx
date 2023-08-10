@@ -9,14 +9,14 @@ type Props = {
 export const FormFieldItem = ({ children, errorPosition, title, widthFull }: Props) => {
   return (
     <FormItem className={`${widthFull === true && "basis-1/2"}`}>
-      <div className="flex gap-2 items-center min-h-[16px] pb-1">
-        <FormLabel className="text-foreground font-spectral font-light text-base">
+      <div className="flex min-h-[16px] items-center gap-2 pb-1">
+        <FormLabel className="font-spectral text-base font-medium text-foreground">
           {title}
         </FormLabel>
-        {errorPosition === "top" && <FormMessage className="dark:text-red-600 text-xs" />}
+        {errorPosition === "top" && <FormMessage className="text-xs dark:text-red-600" />}
       </div>
       <FormControl>{children}</FormControl>
-      {errorPosition === "bottom" && <FormMessage className="dark:text-red-600 text-xs" />}
+      {errorPosition === "bottom" && <FormMessage className="text-xs dark:text-red-600" />}
     </FormItem>
   )
 }

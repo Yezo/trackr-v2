@@ -133,19 +133,19 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
   return (
     <div className="">
       <Dialog open={openDialog} onOpenChange={handleSoftClose}>
-        <DialogTrigger className="inline-flex gap-2 items-center justify-center rounded-full text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2">
+        <DialogTrigger className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
           <PlusCircledIcon />
           Add Job
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="mb-2">Add A Job Application</DialogTitle>
+            <DialogTitle className="mb-2 font-medium">Add A Job Application</DialogTitle>
             <Separator />
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
               {submissionError && (
-                <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
+                <p className="flex min-w-full items-center justify-center gap-2 rounded-md bg-red-600 py-2 text-xs text-white">
                   <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
                   <span className="uppercase tracking-wider ">
                     There was an error submitting the form.
@@ -153,7 +153,7 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
                 </p>
               )}
 
-              <div className="flex items-center gap-4 justify-between">
+              <div className="flex items-center justify-between gap-4">
                 <FormField
                   control={form.control}
                   name="company"
@@ -183,7 +183,7 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
                   </FormFieldItem>
                 )}
               />
-              <div className="flex items-center gap-4 justify-between">
+              <div className="flex items-center justify-between gap-4">
                 <FormField
                   control={form.control}
                   name="remote"
@@ -239,7 +239,7 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
 
               <Separator />
 
-              <div className="flex gap-4 justify-end">
+              <div className="flex justify-end gap-4">
                 <Button
                   variant="secondary"
                   type="button"
@@ -249,11 +249,11 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
                   Discard
                 </Button>
                 {form.formState.isSubmitting ? (
-                  <Button type="submit" className="basis-1/2 flex items-center gap-2" disabled>
+                  <Button type="submit" className="flex basis-1/2 items-center gap-2" disabled>
                     <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Add
                   </Button>
                 ) : (
-                  <Button type="submit" className="basis-1/2 flex items-center gap-2">
+                  <Button type="submit" className="flex basis-1/2 items-center gap-2">
                     Add
                   </Button>
                 )}

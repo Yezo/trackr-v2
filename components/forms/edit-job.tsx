@@ -8,7 +8,12 @@ import { Separator } from "@/components/ui/separator"
 import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { FormFieldItem } from "@/components/forms/formfield-item"
-import { ExclamationTriangleIcon, UpdateIcon, PlusCircledIcon } from "@radix-ui/react-icons"
+import {
+  ExclamationTriangleIcon,
+  UpdateIcon,
+  PlusCircledIcon,
+  Pencil2Icon,
+} from "@radix-ui/react-icons"
 
 import { useForm } from "react-hook-form"
 import { useState, useTransition } from "react"
@@ -28,6 +33,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 
 //Zod Schema for sign in form
 const formSchema = z.object({
@@ -56,16 +62,22 @@ const formSchema = z.object({
     message: "Password is required.",
   }),
 })
-
-export const EditJobForm = ({
-  userID,
-  jobID,
-  setDropdownOpen,
-}: {
-  userID: string
-  jobID: string
+type Props = {
+  data: {
+    userID: string
+    jobID: string
+    company: string
+    jobTitle: string
+    link: string
+    remote: "Remote" | "On-site" | "Hybrid"
+    status: "Pending" | "Interview" | "Rejected" | "Accepted"
+    notes: string
+  }
   setDropdownOpen: (value: React.SetStateAction<boolean>) => void
-}) => {
+  dropdownOpen: boolean
+}
+
+export const EditJobForm = ({ setDropdownOpen, data, dropdownOpen }: Props) => {
   //States
   const [submissionError, setSubmissionError] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
@@ -75,13 +87,13 @@ export const EditJobForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      company: "",
-      jobTitle: "",
-      link: "",
-      remote: "Remote",
-      status: "Pending",
-      notes: "",
-      userID: userID,
+      company: data.company,
+      jobTitle: data.jobTitle,
+      link: data.link,
+      remote: data.remote,
+      status: data.status,
+      notes: data.notes,
+      userID: data.userID,
     },
   })
 
@@ -92,7 +104,7 @@ export const EditJobForm = ({
     setSubmissionError(false)
 
     //Submission
-    const res = await fetch(`/api/job/${jobID}`, {
+    const res = await fetch(`/api/job/${data.jobID}`, {
       method: "PUT",
       body: JSON.stringify(values),
     }).then((res) => res.json())
@@ -118,6 +130,7 @@ export const EditJobForm = ({
     //For when the user clicks the discard button
     //Then close dialog + reset form fields and errors
     setOpenDialog(false)
+    setDropdownOpen(false)
     form.reset()
     form.clearErrors()
   }
@@ -133,13 +146,13 @@ export const EditJobForm = ({
 
   return (
     <Dialog open={openDialog} onOpenChange={handleSoftClose}>
-      <DialogTrigger className="">
-        <PlusCircledIcon />
-        Edit Job
+      <DialogTrigger className="relative flex min-w-full cursor-default select-none items-center gap-2  rounded-sm px-2  py-1.5 text-sm outline-none  transition-colors hover:bg-muted focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-[#1E293B]">
+        <Pencil2Icon />
+        Edit
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-2">Edit Your Job Application</DialogTitle>
+          <DialogTitle className="mb-2 font-medium">Edit Your Job Application</DialogTitle>
           <Separator />
         </DialogHeader>
         <Form {...form}>
@@ -250,11 +263,11 @@ export const EditJobForm = ({
               </Button>
               {form.formState.isSubmitting ? (
                 <Button type="submit" className="flex basis-1/2 items-center gap-2" disabled>
-                  <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Add
+                  <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Save
                 </Button>
               ) : (
                 <Button type="submit" className="flex basis-1/2 items-center gap-2">
-                  Add
+                  Save
                 </Button>
               )}
             </div>
