@@ -12,6 +12,11 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     await startDB()
 
     if (req.method === "GET") {
+      //Check if the ID exists or not
+      if (!id) {
+        return { error: "ID not found" }
+      }
+
       //Fetch job applications where the userID matches the sessionID
       const fetchedJobApplications = await JobModel.find({ userID: id })
       return NextResponse.json({ fetchedJobApplications })
@@ -52,13 +57,13 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   const id = params.id
 
   //https://codevoweb.com/setup-and-use-mongodb-in-nextjs-13-app-directory/
-  function stringToObjectId(id: string): mongoose.Types.ObjectId | null {
-    if (mongoose.Types.ObjectId.isValid(id)) {
-      return new mongoose.Types.ObjectId(id)
-    } else {
-      return null
-    }
-  }
+  // function stringToObjectId(id: string): mongoose.Types.ObjectId | null {
+  //   if (mongoose.Types.ObjectId.isValid(id)) {
+  //     return new mongoose.Types.ObjectId(id)
+  //   } else {
+  //     return null
+  //   }
+  // }
 
   try {
     //Start the DB connection
@@ -66,15 +71,15 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     if (req.method === "DELETE") {
       //Parse id back to an ObjectId for Mongo
-      const parsedId = stringToObjectId(id)
+      // const parsedId = stringToObjectId(id)
 
       //Validate ID
-      if (!parsedId) {
+      if (!id) {
         return { error: "ID not found" }
       }
 
       //Find and remove based on the job ID
-      const removed = await JobModel.findByIdAndDelete(parsedId).exec()
+      const removed = await JobModel.findByIdAndDelete(id).exec()
 
       return NextResponse.json("Deletion successful.")
     } else {

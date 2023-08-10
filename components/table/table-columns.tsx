@@ -191,9 +191,17 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
       )
     },
     cell: ({ row }) => {
-      const userID = row.original.userID
-      const jobID = row.original._id
-      return <TableActions userID={userID} jobID={jobID} />
+      const data = {
+        userID: row.original.userID,
+        jobID: row.original._id,
+        company: row.original.company,
+        jobTitle: row.original.jobTitle,
+        link: row.original.link,
+        remote: row.original.remote,
+        status: row.original.status,
+        notes: row.original.notes,
+      }
+      return <TableActions data={data} />
     },
   },
 ]

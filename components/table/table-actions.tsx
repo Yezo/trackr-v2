@@ -12,13 +12,23 @@ import {
 
 import { useRef, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
+import { DotsHorizontalIcon, EyeOpenIcon, TrashIcon } from "@radix-ui/react-icons"
+import { Button } from "@/components/ui/button"
 
 type Props = {
-  userID: string
-  jobID: string
+  data: {
+    userID: string
+    jobID: string
+    company: string
+    jobTitle: string
+    link: string
+    remote: "Remote" | "On-site" | "Hybrid"
+    status: "Pending" | "Interview" | "Rejected" | "Accepted"
+    notes: string
+  }
 }
 
-export default function TableActions({ userID, jobID }: Props) {
+export default function TableActions({ data }: Props) {
   //States
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [hasOpenDialog, setHasOpenDialog] = useState(false)
@@ -47,12 +57,15 @@ export default function TableActions({ userID, jobID }: Props) {
       console.log(error)
     }
   }
-
+  const { jobID, userID } = data
   return (
     <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
-        <button className="Button violet" ref={dropdownTriggerRef}>
-          Actions
+        <button
+          className="min-w-fit rounded-xl px-4 py-1 transition-colors hover:bg-background"
+          ref={dropdownTriggerRef}
+        >
+          <DotsHorizontalIcon />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -69,20 +82,24 @@ export default function TableActions({ userID, jobID }: Props) {
         }}
       >
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="DropdownMenuLabel">Items with dialog</DropdownMenuLabel>
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem>
+            <button onClick={() => handleDeleteJob(jobID)} className="flex items-center gap-2">
+              <EyeOpenIcon /> View
+            </button>
+          </DropdownMenuItem>
 
-          <EditJobForm userID={userID} setDropdownOpen={setDropdownOpen} jobID={jobID} />
-          <button onClick={() => handleDeleteJob(jobID)}>delete</button>
+          <EditJobForm setDropdownOpen={setDropdownOpen} data={data} dropdownOpen={dropdownOpen} />
         </DropdownMenuGroup>
 
-        <DropdownMenuSeparator className="DropdownMenuSeparator" />
+        <DropdownMenuSeparator />
 
-        <DropdownMenuGroup>
-          <DropdownMenuLabel className="DropdownMenuLabel">Regular items</DropdownMenuLabel>
-          <DropdownMenuItem className="DropdownMenuItem">Duplicate</DropdownMenuItem>
-          <DropdownMenuItem className="DropdownMenuItem">Copy</DropdownMenuItem>
-          <DropdownMenuItem className="DropdownMenuItem">Save</DropdownMenuItem>
-        </DropdownMenuGroup>
+        <button
+          onClick={() => handleDeleteJob(jobID)}
+          className="relative flex min-w-full cursor-default select-none items-center  gap-2 rounded-sm  px-2 py-1.5 text-sm  outline-none transition-colors hover:bg-destructive/90 hover:text-white focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-red-700 "
+        >
+          <TrashIcon /> Delete
+        </button>
       </DropdownMenuContent>
     </DropdownMenu>
   )
