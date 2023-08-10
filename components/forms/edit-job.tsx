@@ -34,6 +34,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
+import { IData } from "@/types/table"
 
 //Zod Schema for sign in form
 const formSchema = z.object({
@@ -63,16 +64,7 @@ const formSchema = z.object({
   }),
 })
 type Props = {
-  data: {
-    userID: string
-    jobID: string
-    company: string
-    jobTitle: string
-    link: string
-    remote: "Remote" | "On-site" | "Hybrid"
-    status: "Pending" | "Interview" | "Rejected" | "Accepted"
-    notes: string
-  }
+  data: IData
   setDropdownOpen: (value: React.SetStateAction<boolean>) => void
   dropdownOpen: boolean
 }

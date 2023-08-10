@@ -200,6 +200,7 @@ export const columns: ColumnDef<FetchedJobApplications>[] = [
         remote: row.original.remote,
         status: row.original.status,
         notes: row.original.notes,
+        addedOn: row.original.createdAt,
       }
       return <TableActions data={data} />
     },

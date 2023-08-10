@@ -13,19 +13,11 @@ import {
 import { useRef, useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
 import { DotsHorizontalIcon, EyeOpenIcon, TrashIcon } from "@radix-ui/react-icons"
-import { Button } from "@/components/ui/button"
+import { TableViewJobApplication } from "@/components/table/table-view-app"
+import { IData } from "@/types/table"
 
 type Props = {
-  data: {
-    userID: string
-    jobID: string
-    company: string
-    jobTitle: string
-    link: string
-    remote: "Remote" | "On-site" | "Hybrid"
-    status: "Pending" | "Interview" | "Rejected" | "Accepted"
-    notes: string
-  }
+  data: IData
 }
 
 export default function TableActions({ data }: Props) {
@@ -85,11 +77,12 @@ export default function TableActions({ data }: Props) {
         <DropdownMenuGroup>
           <DropdownMenuLabel className="font-medium">Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <button onClick={() => handleDeleteJob(jobID)} className="flex items-center gap-2">
-              <EyeOpenIcon /> <span>View</span>
-            </button>
-          </DropdownMenuItem>
+
+          <TableViewJobApplication
+            setDropdownOpen={setDropdownOpen}
+            data={data}
+            dropdownOpen={dropdownOpen}
+          />
 
           <EditJobForm setDropdownOpen={setDropdownOpen} data={data} dropdownOpen={dropdownOpen} />
         </DropdownMenuGroup>
