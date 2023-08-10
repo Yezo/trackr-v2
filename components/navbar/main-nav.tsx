@@ -4,21 +4,17 @@ import { ExternalLinks } from "@/components/navbar/external-links"
 import { Logo } from "@/components/typography/Logo"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import React from "react"
 import {
-  AvatarIcon,
   BackpackIcon,
   CommitIcon,
   HomeIcon,
@@ -26,68 +22,122 @@ import {
   MagnifyingGlassIcon,
   PersonIcon,
   PieChartIcon,
-  QuestionMarkCircledIcon,
   QuestionMarkIcon,
   RocketIcon,
   SketchLogoIcon,
 } from "@radix-ui/react-icons"
+
+import { useSession } from "next-auth/react"
+
+const productItems = [
+  {
+    title: "Home",
+    href: "/",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+    icon: (
+      <span>
+        <HomeIcon />
+      </span>
+    ),
+  },
+  {
+    title: "Discover",
+    href: "/",
+    description: "For sighted users to preview content available behind a link.",
+    icon: (
+      <span>
+        <ImageIcon />
+      </span>
+    ),
+  },
+  {
+    title: "Our nission",
+    href: "/",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    icon: (
+      <span>
+        <RocketIcon />
+      </span>
+    ),
+  },
+]
+
+const dashboardItems = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    description:
+      "A modal dialog that interrupts the user with important content and expects a response.",
+    icon: (
+      <span>
+        <BackpackIcon />
+      </span>
+    ),
+  },
+  {
+    title: "User Profile",
+    href: "/profile",
+    description: "For sighted users to preview content available behind a link.",
+    icon: (
+      <span>
+        <PersonIcon />
+      </span>
+    ),
+  },
+  {
+    title: "Metrics",
+    href: "/dashboard",
+    description:
+      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    icon: (
+      <span>
+        <PieChartIcon />
+      </span>
+    ),
+    comingSoon: true,
+  },
+  {
+    title: "History",
+    href: "/dashboard",
+    description:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam illum id adipisci quis temporibus.",
+    icon: (
+      <span>
+        <CommitIcon />
+      </span>
+    ),
+    comingSoon: true,
+  },
+  {
+    title: "Find Jobs",
+    href: "/dashboard",
+    description:
+      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    icon: (
+      <span>
+        <MagnifyingGlassIcon />
+      </span>
+    ),
+    comingSoon: true,
+  },
+  {
+    title: "Random Feature",
+    href: "/dashboard",
+    description:
+      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    icon: (
+      <span>
+        <QuestionMarkIcon />
+      </span>
+    ),
+    comingSoon: true,
+  },
+]
+
 export const MainNav = () => {
-  const pathname = usePathname()
-
-  const navItems = {
-    "/services": {
-      title: "Services",
-    },
-    "/history": {
-      title: "History",
-    },
-    "/about": {
-      title: "About Us",
-    },
-  }
-  const testItems = [
-    {
-      title: "Dashboard",
-      href: "/dashboard",
-      description:
-        "A modal dialog that interrupts the user with important content and expects a response.",
-    },
-    {
-      title: "User Profile",
-      href: "/profile",
-      description: "For sighted users to preview content available behind a link.",
-    },
-    {
-      title: "Metrics",
-      href: "/dashboard",
-      description:
-        "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-    },
-    {
-      title: "History",
-      href: "/dashboard",
-      description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam illum id adipisci quis temporibus.",
-    },
-    {
-      title: "Find Jobs",
-      href: "/dashboard",
-      description:
-        "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-    },
-    {
-      title: "Some Feature I Haven't Thought Of",
-      href: "/dashboard",
-      description:
-        "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-    },
-  ]
-
-  //!TODO
-  //add highlighting if its same path
-  //add more individual inks
-  // add NEW/DISABLED badges next to titles
-  // add protected conditional route for dashboard for users only
+  const { status } = useSession()
 
   return (
     <div className="hidden h-16 border-b sm:block ">
@@ -96,20 +146,6 @@ export const MainNav = () => {
           <Logo />
 
           <nav className="flex items-center space-x-6 text-sm font-medium">
-            {/* {Object.entries(navItems).map(([path, { title }]) => {
-              return (
-                <Link
-                  href={path}
-                  className={cn(
-                    "font-light transition-colors hover:text-foreground/80",
-                    pathname === path ? "text-foreground" : "text-foreground/60"
-                  )}
-                  key={path}
-                >
-                  {title}
-                </Link>
-              )
-            })} */}
             <NavigationMenu className="font-normal">
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -132,94 +168,40 @@ export const MainNav = () => {
                           </a>
                         </NavigationMenuLink>
                       </li>
-                      <TestLinkItem title="Home" description="Just click the logo" href="/">
-                        <HomeIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="Discover"
-                        description="Lorem ipsum dolor sit amet consectetur."
-                        href="/"
-                      >
-                        <ImageIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="Our Mission"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/"
-                      >
-                        <RocketIcon />
-                      </TestLinkItem>
+                      {productItems.map(({ title, href, icon, description }) => (
+                        <LinkItem
+                          title={title}
+                          href={href}
+                          icon={icon}
+                          description={description}
+                          key={title}
+                        ></LinkItem>
+                      ))}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="text-sm font-normal tracking-normal">
-                    Dashboard
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {/* {testItems.map((component) => (
-                        <ListItem
-                          key={component.title}
-                          title={component.title}
-                          href={component.href}
-                        >
-                          {component.description}
-                        </ListItem>
-                      ))} */}
-                      <TestLinkItem
-                        title="Dashboard"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/dashboard"
-                      >
-                        <BackpackIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="User Profile"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/profile"
-                      >
-                        <PersonIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="Metrics"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/dashboard"
-                      >
-                        <PieChartIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="History"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/dashboard"
-                      >
-                        <CommitIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="Find Jobs"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/dashboard"
-                      >
-                        <MagnifyingGlassIcon />
-                      </TestLinkItem>
-
-                      <TestLinkItem
-                        title="Random Feature"
-                        description="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
-                        href="/dashboard"
-                      >
-                        <QuestionMarkIcon />
-                      </TestLinkItem>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
+                {status === "authenticated" && (
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-sm font-normal tracking-normal">
+                      Dashboard
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        {dashboardItems.map(({ title, href, icon, description, comingSoon }) => (
+                          <LinkItem
+                            title={title}
+                            href={href}
+                            icon={icon}
+                            description={description}
+                            key={title}
+                            comingSoon={comingSoon}
+                          ></LinkItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                )}
 
                 <NavigationMenuItem>
                   <Link href="/docs" legacyBehavior passHref>
@@ -236,63 +218,61 @@ export const MainNav = () => {
         </div>
 
         <ExternalLinks />
-        {/* <AuthLinks /> */}
       </div>
     </div>
   )
 }
 
-const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
-  ({ className, title, children, ...props }, ref) => {
-    return (
-      <li>
-        <NavigationMenuLink asChild>
-          <a
-            ref={ref}
-            className={cn(
-              "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-              className
-            )}
-            {...props}
-          >
-            <div className="text-sm font-normal leading-none">{title}</div>
-            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">{children}</p>
-          </a>
-        </NavigationMenuLink>
-      </li>
-    )
-  }
-)
-ListItem.displayName = "ListItem"
-
-const TestLinkItem = ({
+const LinkItem = ({
   title,
-  children,
   description,
   href,
+  icon,
+  comingSoon,
 }: {
   title: string
-  children: React.ReactNode
   description: string
   href: string
+  icon: React.JSX.Element
+  comingSoon?: boolean
 }) => {
   return (
     <li>
       <NavigationMenuLink asChild>
-        <Link
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-          )}
-          href={href}
-        >
-          <div className="flex items-center gap-2 text-sm font-normal leading-none">
-            <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
-              {children}
+        {!comingSoon ? (
+          <Link
+            className={cn(
+              `block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`
+            )}
+            href={href}
+          >
+            <div className="flex items-center gap-2 text-sm font-normal leading-none">
+              <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
+                {icon}
+              </div>
+              {title}
             </div>
-            {title}
+            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">{description}</p>
+          </Link>
+        ) : (
+          <div
+            className={cn(
+              `block cursor-default select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none grayscale transition-colors
+         `
+            )}
+          >
+            <div className="flex items-center gap-2 text-sm font-normal leading-none">
+              <span className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
+                {icon}
+              </span>
+              <span>{title}</span>
+              <div className="rounded-full bg-blue-600 px-2 py-0.5 text-[0.6rem] tracking-wide">
+                COMING SOON
+              </div>
+            </div>
+            <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">{description}</p>
           </div>
-          <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">{description}</p>
-        </Link>
+        )}
       </NavigationMenuLink>
     </li>
   )
