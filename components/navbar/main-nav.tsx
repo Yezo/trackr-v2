@@ -266,7 +266,7 @@ const LinkItem = ({
                 {icon}
               </span>
               <span>{title}</span>
-              <div className="rounded-full bg-blue-600 px-2 py-0.5 text-[0.6rem] tracking-wide">
+              <div className="rounded-full bg-blue-600 px-2 py-0.5 text-[0.6rem] tracking-wide text-white dark:text-black">
                 COMING SOON
               </div>
             </div>
