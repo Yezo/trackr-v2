@@ -8,7 +8,7 @@ type Props = {
 export const TableColumnHeaderItem = ({ children, column }: Props) => {
   return (
     <div
-      className="flex min-w-full cursor-pointer items-center gap-2 rounded px-4 py-2 transition-colors hover:bg-primary/5 hover:text-secondary-foreground"
+      className="my-1 flex min-w-full cursor-pointer items-center gap-2 rounded px-4 py-2 transition-colors hover:bg-primary/5 hover:text-secondary-foreground"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
     >
       {children}

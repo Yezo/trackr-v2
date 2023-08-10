@@ -57,7 +57,8 @@ export default function TableActions({ data }: Props) {
       console.log(error)
     }
   }
-  const { jobID, userID } = data
+  const { jobID } = data
+
   return (
     <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
@@ -82,10 +83,11 @@ export default function TableActions({ data }: Props) {
         }}
       >
         <DropdownMenuGroup>
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel className="font-medium">Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             <button onClick={() => handleDeleteJob(jobID)} className="flex items-center gap-2">
-              <EyeOpenIcon /> View
+              <EyeOpenIcon /> <span>View</span>
             </button>
           </DropdownMenuItem>
 
@@ -96,9 +98,9 @@ export default function TableActions({ data }: Props) {
 
         <button
           onClick={() => handleDeleteJob(jobID)}
-          className="relative flex min-w-full cursor-default select-none items-center  gap-2 rounded-sm  px-2 py-1.5 text-sm  outline-none transition-colors hover:bg-destructive/90 hover:text-white focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-red-700 "
+          className="relative flex min-w-full cursor-pointer select-none items-center gap-2  rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-destructive/90 hover:text-white focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-red-700 "
         >
-          <TrashIcon /> Delete
+          <TrashIcon /> <span>Delete</span>
         </button>
       </DropdownMenuContent>
     </DropdownMenu>
