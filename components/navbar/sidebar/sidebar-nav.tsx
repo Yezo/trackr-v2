@@ -2,15 +2,9 @@
 
 import { usePathname } from "next/navigation"
 import {
-  ChevronDownIcon,
-  GitHubLogoIcon,
-  ExitIcon,
   PersonIcon,
   GearIcon,
   HomeIcon,
-  HeartIcon,
-  MoonIcon,
-  SunIcon,
   FileIcon,
   PieChartIcon,
   BackpackIcon,
@@ -18,7 +12,7 @@ import {
   AvatarIcon,
 } from "@radix-ui/react-icons"
 
-import SidebarLink from "@/components/navbar/sidebar/sidebar-link"
+import { SidebarLink } from "@/components/navbar/sidebar/sidebar-link"
 import { Session } from "next-auth"
 import Link from "next/link"
 
@@ -60,7 +54,7 @@ const accountNavItems = {
   },
 }
 
-export default function Sidebar({ session }: Props) {
+export const Sidebar = ({ session }: Props) => {
   let pathname = usePathname() || "/"
   const userName = session?.user?.name
 

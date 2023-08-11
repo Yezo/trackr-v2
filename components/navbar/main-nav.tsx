@@ -138,6 +138,7 @@ const dashboardItems = [
 
 export const MainNav = () => {
   const { status } = useSession()
+  console.log(status)
 
   return (
     <div className="hidden h-16 border-b sm:block ">

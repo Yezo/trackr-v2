@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import Sidebar from "@/components/navbar/sidebar/sidebar-nav"
+import { Sidebar } from "@/components/navbar/sidebar/sidebar-nav"
 import { columns } from "@/components/table/table-columns"
 
 import { DataTable } from "@/components/table/data-table"
@@ -13,6 +13,7 @@ import {
   ScissorsIcon,
 } from "@radix-ui/react-icons"
 import { AddJobForm } from "@/components/forms/add-job"
+import { HomeHeader } from "@/components/layout/home-header"
 
 async function getData(id: string | undefined) {
   try {
@@ -51,15 +52,7 @@ export default async function DashboardPage() {
     <div className="flex">
       <Sidebar session={session} />
       <section className="container mx-auto flex-1 space-y-8 px-4 py-8 md:px-32">
-        <div>
-          <div className="space-y-4">
-            <h2 className="space-x-2 text-xs font-light">
-              <span className="text-muted-foreground">Home</span> <span>/</span>
-              <span>Dashboard</span>
-            </h2>
-            <h1 className="font-spectral text-3xl font-light ">Dashboard</h1>
-          </div>
-        </div>
+        <HomeHeader currentPage="Dashboard" currentPageURL="/dashboard" />
 
         {/* <div className="flex flex-wrap gap-1">
           <CardComponent
