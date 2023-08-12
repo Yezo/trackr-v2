@@ -53,7 +53,7 @@ export const ExternalLinks = () => {
               <div className="rounded-full ">
                 <AvatarIcon className="h-6 w-6" />
               </div>
-              {/* {data?.user?.name}  */}
+
               <ChevronDownIcon />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[165px]" alignOffset={0}>
@@ -67,26 +67,30 @@ export const ExternalLinks = () => {
               <DropdownMenuSeparator />
 
               <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <Link href="/profile" className="flex min-w-full items-center">
-                    <PersonIcon className="mr-2 " />
+                <Link href="/profile">
+                  <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                    <PersonIcon />
                     <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/dashboard" className="flex min-w-full items-center">
-                    <BackpackIcon className="mr-2" />
+                  </DropdownMenuItem>
+                </Link>
+
+                <Link href="/dashboard">
+                  <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                    <BackpackIcon />
                     <span>Dashboard</span>
-                  </Link>
-                </DropdownMenuItem>
+                  </DropdownMenuItem>
+                </Link>
+
                 <DropdownMenuItem disabled>
                   <PieChartIcon className="mr-2 " />
                   <span>Metrics</span>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem disabled>
                   <CommitIcon className="mr-2 " />
                   <span>Timeline</span>
                 </DropdownMenuItem>
+
                 <DropdownMenuItem disabled>
                   <FileIcon className="mr-2 " />
                   <span>Notes</span>
@@ -95,22 +99,19 @@ export const ExternalLinks = () => {
 
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem>
-                <Link
-                  href="https://github.com/Yezo/trackr-v2"
-                  target="_blank"
-                  className="flex items-center"
-                >
+              <Link href="https://github.com/Yezo/trackr-v2" target="_blank">
+                <DropdownMenuItem className="flex items-center">
                   <PersonIcon className="mr-2 " />
                   <span>GitHub</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="https://kvo.vercel.app/" target="_blank" className="flex items-center">
+                </DropdownMenuItem>
+              </Link>
+
+              <Link href="https://kvo.vercel.app/" target="_blank">
+                <DropdownMenuItem className="flex items-center">
                   <HeartIcon className="mr-2 " />
                   <span>Developer</span>
-                </Link>
-              </DropdownMenuItem>
+                </DropdownMenuItem>
+              </Link>
 
               <DropdownMenuSeparator />
 
