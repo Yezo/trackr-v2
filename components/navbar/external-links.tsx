@@ -81,10 +81,12 @@ export const ExternalLinks = () => {
                   </DropdownMenuItem>
                 </Link>
 
-                <DropdownMenuItem disabled>
-                  <PieChartIcon className="mr-2 " />
-                  <span>Metrics</span>
-                </DropdownMenuItem>
+                <Link href="/metrics">
+                  <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                    <PieChartIcon />
+                    <span>Metrics</span>
+                  </DropdownMenuItem>
+                </Link>
 
                 <DropdownMenuItem disabled>
                   <CommitIcon className="mr-2 " />

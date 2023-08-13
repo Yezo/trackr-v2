@@ -8,13 +8,7 @@ import { Separator } from "@/components/ui/separator"
 import { Form, FormField } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { FormFieldItem } from "@/components/forms/formfield-item"
-import {
-  ExclamationTriangleIcon,
-  UpdateIcon,
-  Pencil2Icon,
-  PlusIcon,
-  PlusCircledIcon,
-} from "@radix-ui/react-icons"
+import { ExclamationTriangleIcon, UpdateIcon, PlusCircledIcon } from "@radix-ui/react-icons"
 
 import { useForm } from "react-hook-form"
 import { useState, useTransition } from "react"

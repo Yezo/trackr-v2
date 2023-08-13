@@ -88,7 +88,7 @@ const dashboardItems = [
   },
   {
     title: "Metrics",
-    href: "/dashboard",
+    href: "/metrics",
     description:
       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
     icon: (
@@ -96,7 +96,6 @@ const dashboardItems = [
         <PieChartIcon />
       </span>
     ),
-    comingSoon: true,
   },
   {
     title: "History",
@@ -138,7 +137,6 @@ const dashboardItems = [
 
 export const MainNav = () => {
   const { status } = useSession()
-  console.log(status)
 
   return (
     <div className="hidden h-16 border-b sm:block ">

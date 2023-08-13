@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         suppressHydrationWarning
         className={`${spectral.variable} ${inter.variable} ${rubik.variable} `}
       >
-        <body className="min-h-screen bg-background antialiased font-rubik">
+        <body className="min-h-screen bg-background font-rubik antialiased">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <MobileNav />
             <MainNav />
