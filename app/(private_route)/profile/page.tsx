@@ -1,8 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { Sidebar } from "@/components/navbar/sidebar/sidebar-nav"
-import { columns } from "@/components/table/table-columns"
-
-import { DataTable } from "@/components/table/data-table"
 import { getServerSession } from "next-auth/next"
 import { EnvelopeOpenIcon } from "@radix-ui/react-icons"
 import { AddJobForm } from "@/components/forms/add-job"
@@ -10,18 +7,7 @@ import { HomeHeader } from "@/components/layout/home-header"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
-async function getData(id: string | undefined) {
-  try {
-    const data = await fetch(`${process.env.LIVE_URL}/api/job/${id}`, {
-      // const data = await fetch(`${process.env.LOCAL_URL}/api/job/${id}`, {
-      cache: "no-store",
-    }).then((res) => res.json())
-    return data
-  } catch (error) {
-    console.log(error)
-  }
-}
+import { getData } from "@/lib/utils"
 
 export default async function ProfilePage() {
   const session = await getServerSession(authOptions)
@@ -40,9 +26,7 @@ export default async function ProfilePage() {
             <div className="min-h-[730px] w-full space-y-4 rounded-xl border p-10">
               <div className="space-y-0.5">
                 <h2 className="text-2xl font-medium tracking-tight">Settings</h2>
-                <p className="text-muted-foreground">
-                  Manage your account settings and set e-mail preferences.
-                </p>
+                <p className="text-muted-foreground">Manage your account settings.</p>
               </div>
               <Separator />
               <div className="space-y-2">

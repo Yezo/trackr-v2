@@ -14,25 +14,14 @@ import {
 } from "@radix-ui/react-icons"
 import { AddJobForm } from "@/components/forms/add-job"
 import { HomeHeader } from "@/components/layout/home-header"
-
-async function getData(id: string | undefined) {
-  try {
-    const data = await fetch(`${process.env.LIVE_URL}/api/job/${id}`, {
-      // const data = await fetch(`${process.env.LOCAL_URL}/api/job/${id}`, {
-      cache: "no-store",
-    }).then((res) => res.json())
-    return data
-  } catch (error) {
-    console.log(error)
-  }
-}
+import { getData } from "@/lib/utils"
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
 
   //@ts-ignore
   const data = await getData(session?.user.id)
-  console.log(data.fetchedJobApplications)
+
   const filteredPending = data.fetchedJobApplications.filter(
     (item: any) => item.status === "Pending"
   )
