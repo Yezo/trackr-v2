@@ -17,11 +17,11 @@ export const CardComponent = ({
   totalNumber,
 }: Props) => {
   return (
-    <Card className="h-[150] min-w-[169px] shadow-sm ">
+    <Card className="h-[150px] shadow-sm ">
       <CardHeader>
         <CardTitle className="flex items-center justify-between text-xl font-normal tracking-normal">
           {title}
-          <span className="hidden md:block"> {icon}</span>
+          <span className="">{icon}</span>
         </CardTitle>
         <CardDescription className="text-xs tracking-tight">{description}</CardDescription>
       </CardHeader>
