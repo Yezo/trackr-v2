@@ -33,8 +33,7 @@ const productItems = [
   {
     title: "Home",
     href: "/",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+    description: "The starting point of where your incredible journey with Trackr begins",
     icon: (
       <span>
         <HomeIcon />
@@ -42,25 +41,26 @@ const productItems = [
     ),
   },
   {
-    title: "Discover",
+    title: "Blog",
     href: "/",
-    description: "For sighted users to preview content available behind a link.",
+    description: " Dive into a collection of insightful articles, updates, and perspectives",
     icon: (
       <span>
         <ImageIcon />
       </span>
     ),
+    comingSoon: true,
   },
   {
-    title: "Our nission",
+    title: "Our mission",
     href: "/",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    description: "Unveiling the purpose that drives us, outlining our core values and goals",
     icon: (
       <span>
         <RocketIcon />
       </span>
     ),
+    comingSoon: true,
   },
 ]
 
@@ -69,7 +69,7 @@ const dashboardItems = [
     title: "Dashboard",
     href: "/dashboard",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Your central hub for accessing key insights and managing all aspects of your experience",
     icon: (
       <span>
         <BackpackIcon />
@@ -77,20 +77,9 @@ const dashboardItems = [
     ),
   },
   {
-    title: "User Profile",
-    href: "/profile",
-    description: "For sighted users to preview content available behind a link.",
-    icon: (
-      <span>
-        <PersonIcon />
-      </span>
-    ),
-  },
-  {
     title: "Metrics",
     href: "/metrics",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    description: "Explore data trends and insights through informative charts and analysis",
     icon: (
       <span>
         <PieChartIcon />
@@ -100,8 +89,7 @@ const dashboardItems = [
   {
     title: "History",
     href: "/dashboard",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam illum id adipisci quis temporibus.",
+    description: "Trace your journey of events through an interactive chronological display",
     icon: (
       <span>
         <CommitIcon />
@@ -112,23 +100,10 @@ const dashboardItems = [
   {
     title: "Find Jobs",
     href: "/dashboard",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    description: "Discover exciting opportunities tailored to your preferences and skills",
     icon: (
       <span>
         <MagnifyingGlassIcon />
-      </span>
-    ),
-    comingSoon: true,
-  },
-  {
-    title: "Random Feature",
-    href: "/dashboard",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-    icon: (
-      <span>
-        <QuestionMarkIcon />
       </span>
     ),
     comingSoon: true,
@@ -167,13 +142,14 @@ export const MainNav = () => {
                           </a>
                         </NavigationMenuLink>
                       </li>
-                      {productItems.map(({ title, href, icon, description }) => (
+                      {productItems.map(({ title, href, icon, description, comingSoon }) => (
                         <LinkItem
                           title={title}
                           href={href}
                           icon={icon}
                           description={description}
                           key={title}
+                          comingSoon={comingSoon}
                         ></LinkItem>
                       ))}
                     </ul>
