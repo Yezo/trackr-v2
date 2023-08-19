@@ -1,6 +1,13 @@
 "use client"
 import { FormFieldItem } from "@/components/forms/formfield-item"
-import { Form, FormField } from "@/components/ui/form"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { UpdateIcon } from "@radix-ui/react-icons"
@@ -64,39 +71,55 @@ export const EditUsername = ({ session }: { session: Session | null }) => {
   }
 
   return (
-    <div className="space-y-2 pt-4">
+    <div className="">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormFieldItem title="Name" errorPosition="bottom">
-                <>
-                  <Input
-                    placeholder={`${session && session.user && session?.user.name}`}
-                    className="placeholder:text-xs placeholder:capitalize"
-                    {...field}
-                  />
-                  <p className="text-sm text-muted-foreground">This is your new display name.</p>
-                </>
-              </FormFieldItem>
+              <FormItem className="w-full pb-4">
+                <div className="flex min-h-[16px] items-center gap-1 pb-1">
+                  <FormLabel className="font-rubik text-base font-medium text-foreground">
+                    Name
+                  </FormLabel>
+                </div>
+                <FormControl>
+                  <>
+                    <Input
+                      placeholder={`${session && session.user && session?.user.name}`}
+                      className="placeholder:text-xs placeholder:capitalize"
+                      {...field}
+                    />
+                    <p className="text-sm text-muted-foreground">This is your new display name.</p>
+                  </>
+                </FormControl>
+                <FormMessage className="text-xs dark:text-red-600" />
+              </FormItem>
             )}
           />
 
-          {form.formState.isSubmitting ? (
-            <Button type="submit" className="flex  max-w-fit items-center gap-2" disabled>
-              <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Update profile
-            </Button>
-          ) : (
-            <Button type="submit" className=" max-w-fit">
-              Update profile
-            </Button>
-          )}
+          {form.formState.isSubmitting ? <DisabledButton /> : <ActiveButton />}
           {submissionCompleted && "Completed!"}
           {submissionError && "Error!"}
         </form>
       </Form>
     </div>
+  )
+}
+
+const DisabledButton = () => {
+  return (
+    <Button type="submit" className="flex max-w-fit items-center gap-2" disabled>
+      <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Update profile
+    </Button>
+  )
+}
+
+const ActiveButton = () => {
+  return (
+    <Button type="submit" className="max-w-fit">
+      Update profile
+    </Button>
   )
 }

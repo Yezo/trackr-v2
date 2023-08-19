@@ -10,9 +10,7 @@ export const FormFieldItem = ({ children, errorPosition, title, widthFull }: Pro
   return (
     <FormItem className={`${widthFull === true && "basis-1/2"}`}>
       <div className="flex min-h-[16px] items-center gap-2 pb-1">
-        <FormLabel className="font-spectral text-base font-medium text-foreground">
-          {title}
-        </FormLabel>
+        <FormLabel className="text-base font-medium text-foreground">{title}</FormLabel>
         {errorPosition === "top" && <FormMessage className="text-xs dark:text-red-600" />}
       </div>
       <FormControl>{children}</FormControl>

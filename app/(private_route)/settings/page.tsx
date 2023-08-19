@@ -2,7 +2,6 @@ import { EnvelopeOpenIcon } from "@radix-ui/react-icons"
 import { AddJobForm } from "@/components/forms/add-job"
 import { HomeHeader } from "@/components/layout/home-header"
 import { Separator } from "@/components/ui/separator"
-
 import { MainContainer } from "@/components/layout/main"
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
@@ -21,9 +20,12 @@ export default async function SettingsPage() {
       {data.fetchedJobApplications.length >= 1 ? (
         <>
           <div className="flex min-h-[730px] w-full flex-col justify-between space-y-4 rounded-xl border p-10">
-            <div className="space-y-0.5">
-              <h2 className="text-2xl font-medium tracking-tight">Settings</h2>
-              <p className="text-muted-foreground">Manage your account settings.</p>
+            <div className="w-[50rem] flex-1 space-y-4">
+              <div>
+                <h2 className="text-2xl font-medium tracking-tight">Settings</h2>
+                <p className=" text-muted-foreground">Manage your account settings.</p>
+              </div>
+
               <Separator />
               <EditUsername session={session} />
             </div>
