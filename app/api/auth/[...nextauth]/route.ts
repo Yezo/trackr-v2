@@ -38,6 +38,9 @@ export const authOptions: NextAuthOptions = {
         params.token.role = params.user.role
         params.token.id = params.user.id
       }
+      if (params.trigger === "update" && params.session?.name) {
+        params.token.name = params.session.name
+      }
       return params.token
     },
     session({ session, token }) {
