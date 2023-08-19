@@ -175,7 +175,9 @@ export const ExternalLinks = () => {
             Log In
           </LinkButton>
 
-          <LinkButton href="/signup">Sign Up</LinkButton>
+          <LinkButton href="/signup" className="bg-blue-600 text-foreground hover:bg-blue-700">
+            Sign Up
+          </LinkButton>
         </>
       )}
     </nav>
