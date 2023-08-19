@@ -102,15 +102,15 @@ export const ExternalLinks = () => {
               <DropdownMenuSeparator />
 
               <Link href="https://github.com/Yezo/trackr-v2" target="_blank">
-                <DropdownMenuItem className="flex items-center">
-                  <PersonIcon className="mr-2 " />
+                <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                  <PersonIcon />
                   <span>GitHub</span>
                 </DropdownMenuItem>
               </Link>
 
               <Link href="https://kvo.vercel.app/" target="_blank">
-                <DropdownMenuItem className="flex items-center">
-                  <HeartIcon className="mr-2 " />
+                <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                  <HeartIcon />
                   <span>Developer</span>
                 </DropdownMenuItem>
               </Link>
@@ -122,32 +122,43 @@ export const ExternalLinks = () => {
                   <DropdownMenuSubTrigger>
                     {theme === "light" && <SunIcon className="mr-2 " />}
                     {theme === "dark" && <MoonIcon className="mr-2 " />}
-                    <span>Theme</span>
+                    <span className="cursor-pointer">Theme</span>
                   </DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent>
-                      <DropdownMenuItem onClick={() => setTheme("light")}>
-                        <SunIcon className="mr-2 " />
+                      <DropdownMenuItem
+                        onClick={() => setTheme("light")}
+                        className="flex cursor-pointer items-center gap-2"
+                      >
+                        <SunIcon />
                         <span>Light</span>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setTheme("dark")}>
-                        <MoonIcon className="mr-2 " />
+                      <DropdownMenuItem
+                        onClick={() => setTheme("dark")}
+                        className="flex cursor-pointer items-center gap-2"
+                      >
+                        <MoonIcon />
                         <span>Dark</span>
                       </DropdownMenuItem>
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
 
-                <DropdownMenuItem>
-                  <GearIcon className="mr-2 " />
-                  <span>Settings</span>
-                </DropdownMenuItem>
+                <Link href="/settings">
+                  <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
+                    <GearIcon />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuGroup>
 
               <DropdownMenuSeparator />
 
-              <DropdownMenuItem onClick={() => signOut()}>
-                <ExitIcon className="mr-2 " /> <span>Log out</span>
+              <DropdownMenuItem
+                onClick={() => signOut()}
+                className="flex cursor-pointer items-center gap-2"
+              >
+                <ExitIcon /> <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
