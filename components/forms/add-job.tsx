@@ -127,7 +127,7 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
   return (
     <div className="">
       <Dialog open={openDialog} onOpenChange={handleSoftClose}>
-        <DialogTrigger className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+        <DialogTrigger className="inline-flex h-9 items-center justify-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-xs font-medium text-primary-foreground text-white shadow transition-colors hover:bg-blue-600/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
           <PlusCircledIcon />
           Add Job
         </DialogTrigger>
@@ -243,12 +243,19 @@ export const AddJobForm = ({ session }: { session: Session | null }) => {
                   Discard
                 </Button>
                 {form.formState.isSubmitting ? (
-                  <Button type="submit" className="flex basis-1/2 items-center gap-2" disabled>
-                    <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Add
+                  <Button
+                    type="submit"
+                    className="flex basis-1/2 items-center gap-2 bg-blue-600 text-white hover:bg-blue-600/90"
+                    disabled
+                  >
+                    <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Save
                   </Button>
                 ) : (
-                  <Button type="submit" className="flex basis-1/2 items-center gap-2">
-                    Add
+                  <Button
+                    type="submit"
+                    className="flex basis-1/2 items-center gap-2 bg-blue-600 text-white hover:bg-blue-600/90"
+                  >
+                    Save
                   </Button>
                 )}
               </div>

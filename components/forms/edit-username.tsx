@@ -110,7 +110,11 @@ export const EditUsername = ({ session }: { session: Session | null }) => {
 
 const DisabledButton = () => {
   return (
-    <Button type="submit" className="flex max-w-fit items-center gap-2" disabled>
+    <Button
+      type="submit"
+      className="flex max-w-fit items-center gap-2 bg-blue-600 text-white hover:bg-blue-600/90"
+      disabled
+    >
       <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Update profile
     </Button>
   )
@@ -118,7 +122,7 @@ const DisabledButton = () => {
 
 const ActiveButton = () => {
   return (
-    <Button type="submit" className="max-w-fit">
+    <Button type="submit" className="max-w-fit bg-blue-600 text-white hover:bg-blue-600/90">
       Update profile
     </Button>
   )

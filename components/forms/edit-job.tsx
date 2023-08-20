@@ -254,11 +254,18 @@ export const EditJobForm = ({ setDropdownOpen, data, dropdownOpen }: Props) => {
                 Discard
               </Button>
               {form.formState.isSubmitting ? (
-                <Button type="submit" className="flex basis-1/2 items-center gap-2" disabled>
+                <Button
+                  type="submit"
+                  className="flex basis-1/2 items-center gap-2 bg-blue-600 text-white hover:bg-blue-600/90"
+                  disabled
+                >
                   <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Save
                 </Button>
               ) : (
-                <Button type="submit" className="flex basis-1/2 items-center gap-2">
+                <Button
+                  type="submit"
+                  className="flex basis-1/2 items-center gap-2 bg-blue-600 text-white hover:bg-blue-600/90"
+                >
                   Save
                 </Button>
               )}
