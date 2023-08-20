@@ -9,7 +9,7 @@ export const Footer = () => {
   return (
     <footer>
       <Separator />
-      <div className="container mx-auto flex flex-col px-4 py-16 md:flex-row md:px-32">
+      <div className="container mx-auto flex flex-col px-8 py-16 md:flex-row md:px-32">
         <div className="md:w-[10rem] lg:w-[25rem]">
           <div className="flex min-h-full items-center justify-between md:flex-col md:items-start">
             <div className="space-y-2">

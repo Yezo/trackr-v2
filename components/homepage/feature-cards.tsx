@@ -9,7 +9,7 @@ type Props = {
 export const FeatureCard = ({ title, description, size, icon }: Props) => {
   return (
     <div className="flex w-full flex-col gap-3 md:gap-2">
-      <div className="align-center item-center flex flex-row gap-3 md:flex-col md:gap-4">
+      <div className="align-center flex flex-row items-center gap-3 md:flex-col md:items-start md:gap-4">
         <div className="max-w-fit rounded-lg bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-300 via-blue-400 to-blue-700 p-2 text-white/90">
           {icon}
         </div>
