@@ -3,7 +3,7 @@ type Props = {
 }
 export const TableColumnCellBoxItem = ({ children }: Props) => {
   const classes =
-    "ml-4 min-w-[90px] max-w-fit rounded-full py-0.5 text-center text-[0.65rem] uppercase tracking-widest text-white ring-2 ring-black/[] shadow-sm"
+    "ml-4 min-w-[90px] max-w-fit rounded-full py-0.5 text-center text-[0.65rem] uppercase tracking-widest text-white ring-2 ring-black/[] shadow-sm select-none"
   if (children === "Remote") {
     return <div className={`${classes} bg-gray-600`}>{children}</div>
   }
