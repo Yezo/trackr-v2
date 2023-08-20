@@ -8,6 +8,7 @@ import { MainNav } from "@/components/navbar/main-nav"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/components/auth-provider"
 import { Analytics } from "@vercel/analytics/react"
+import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "Trackr.",
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             <Analytics />
             <Toaster />
+            <Footer />
           </ThemeProvider>
         </body>
       </html>
