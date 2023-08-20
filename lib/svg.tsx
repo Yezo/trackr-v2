@@ -11,7 +11,7 @@ import {
 export const LockIconSVG = () => {
   return (
     <>
-      <LockClosedIcon className="h-6 w-6" />
+      <LockClosedIcon className="h-5 w-5" />
     </>
   )
 }
@@ -19,7 +19,7 @@ export const LockIconSVG = () => {
 export const BackpackIconSVG = () => {
   return (
     <>
-      <BackpackIcon className="h-6 w-6" />
+      <BackpackIcon className="h-5 w-5" />
     </>
   )
 }
@@ -27,7 +27,7 @@ export const BackpackIconSVG = () => {
 export const CursorIconSVG = () => {
   return (
     <>
-      <MagicWandIcon className="h-6 w-6" />
+      <MagicWandIcon className="h-5 w-5" />
     </>
   )
 }
@@ -35,7 +35,7 @@ export const CursorIconSVG = () => {
 export const MetricsIconSVG = () => {
   return (
     <>
-      <PieChartIcon className="h-6 w-6" />
+      <PieChartIcon className="h-5 w-5" />
     </>
   )
 }
@@ -43,7 +43,7 @@ export const MetricsIconSVG = () => {
 export const ImagesIconSVG = () => {
   return (
     <>
-      <ImageIcon className="h-6 w-6" />
+      <ImageIcon className="h-5 w-5" />
     </>
   )
 }
@@ -51,7 +51,7 @@ export const ImagesIconSVG = () => {
 export const PlusIconSVG = () => {
   return (
     <>
-      <PlusCircledIcon className="h-6 w-6" />
+      <PlusCircledIcon className="h-5 w-5" />
     </>
   )
 }
@@ -59,7 +59,7 @@ export const PlusIconSVG = () => {
 export const MoonIconSVG = () => {
   return (
     <>
-      <MoonIcon className="h-6 w-6" />
+      <MoonIcon className="h-5 w-5" />
     </>
   )
 }
