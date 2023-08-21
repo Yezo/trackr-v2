@@ -14,101 +14,10 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import React from "react"
-import {
-  BackpackIcon,
-  CommitIcon,
-  HomeIcon,
-  ImageIcon,
-  MagnifyingGlassIcon,
-  PersonIcon,
-  PieChartIcon,
-  QuestionMarkIcon,
-  RocketIcon,
-  SketchLogoIcon,
-} from "@radix-ui/react-icons"
+import { SketchLogoIcon } from "@radix-ui/react-icons"
 
 import { useSession } from "next-auth/react"
-
-const productItems = [
-  {
-    title: "Home",
-    href: "/",
-    description: "The starting point of where your incredible journey with Trackr begins",
-    icon: (
-      <span>
-        <HomeIcon />
-      </span>
-    ),
-  },
-  {
-    title: "Blog",
-    href: "/",
-    description: " Dive into a collection of insightful articles, updates, and perspectives",
-    icon: (
-      <span>
-        <ImageIcon />
-      </span>
-    ),
-    comingSoon: true,
-  },
-  {
-    title: "Our mission",
-    href: "/",
-    description: "Unveiling the purpose that drives us, outlining our core values and goals",
-    icon: (
-      <span>
-        <RocketIcon />
-      </span>
-    ),
-    comingSoon: true,
-  },
-]
-
-const dashboardItems = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    description:
-      "Your central hub for accessing key insights and managing all aspects of your experience",
-    icon: (
-      <span>
-        <BackpackIcon />
-      </span>
-    ),
-  },
-  {
-    title: "Metrics",
-    href: "/metrics",
-    description: "Explore data trends and insights through informative charts and analysis",
-    icon: (
-      <span>
-        <PieChartIcon />
-      </span>
-    ),
-  },
-  {
-    title: "History",
-    href: "/dashboard",
-    description: "Trace your journey of events through an interactive chronological display",
-    icon: (
-      <span>
-        <CommitIcon />
-      </span>
-    ),
-    comingSoon: true,
-  },
-  {
-    title: "Find Jobs",
-    href: "/dashboard",
-    description: "Discover exciting opportunities tailored to your preferences and skills",
-    icon: (
-      <span>
-        <MagnifyingGlassIcon />
-      </span>
-    ),
-    comingSoon: true,
-  },
-]
+import { productItems, dashboardItems } from "@/components/navbar/nav-data"
 
 export const MainNav = () => {
   const { status } = useSession()
