@@ -126,49 +126,49 @@ export const MobileNav = () => {
                       )}
                     </>
                   ))}
-
-                  {dashboardItems.map(({ title, href, icon, description, comingSoon }) => (
-                    <>
-                      {!comingSoon ? (
-                        <>
-                          <Link
-                            className={cn(
-                              `block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`
-                            )}
-                            href={href}
-                          >
-                            <div className="flex items-center gap-2 text-sm font-normal leading-none">
-                              <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
-                                {icon}
+                  {status === "authenticated" &&
+                    dashboardItems.map(({ title, href, icon, description, comingSoon }) => (
+                      <>
+                        {!comingSoon ? (
+                          <>
+                            <Link
+                              className={cn(
+                                `block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`
+                              )}
+                              href={href}
+                            >
+                              <div className="flex items-center gap-2 text-sm font-normal leading-none">
+                                <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
+                                  {icon}
+                                </div>
+                                {title}
                               </div>
-                              {title}
-                            </div>
-                          </Link>
-                          <Separator />
-                        </>
-                      ) : (
-                        <>
-                          <div
-                            className={cn(
-                              `block cursor-default select-none rounded-md p-2 leading-none no-underline outline-none grayscale transition-colors
+                            </Link>
+                            <Separator />
+                          </>
+                        ) : (
+                          <>
+                            <div
+                              className={cn(
+                                `block cursor-default select-none rounded-md p-2 leading-none no-underline outline-none grayscale transition-colors
  `
-                            )}
-                          >
-                            <div className="flex items-center gap-2 text-sm font-normal leading-none">
-                              <span className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
-                                {icon}
-                              </span>
-                              <span>{title}</span>
-                              <div className="rounded-full bg-blue-600 px-2 py-0.5 text-[0.6rem] tracking-wide text-white dark:text-black">
-                                COMING SOON
+                              )}
+                            >
+                              <div className="flex items-center gap-2 text-sm font-normal leading-none">
+                                <span className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
+                                  {icon}
+                                </span>
+                                <span>{title}</span>
+                                <div className="rounded-full bg-blue-600 px-2 py-0.5 text-[0.6rem] tracking-wide text-white dark:text-black">
+                                  COMING SOON
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <Separator />
-                        </>
-                      )}
-                    </>
-                  ))}
+                            <Separator />
+                          </>
+                        )}
+                      </>
+                    ))}
                 </nav>
               </div>
               {status === "authenticated" && (

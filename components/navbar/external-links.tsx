@@ -179,7 +179,7 @@ export const ExternalLinks = () => {
             href="/signup"
             className="bg-blue-600 text-foreground text-white hover:bg-blue-700"
           >
-            Sign Up
+            Get Started
           </LinkButton>
         </>
       )}
