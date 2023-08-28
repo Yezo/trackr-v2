@@ -58,7 +58,7 @@ export const ExternalLinks = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="min-w-[165px]" alignOffset={0}>
               <DropdownMenuLabel className="flex items-center gap-2  text-sm font-semibold capitalize tracking-tight">
-                <Link href="/user/profile" className="rounded-full">
+                <Link href="/settings" className="rounded-full">
                   <AvatarIcon className="h-8 w-8" />
                 </Link>
                 {data?.user?.name}
@@ -67,7 +67,7 @@ export const ExternalLinks = () => {
               <DropdownMenuSeparator />
 
               <DropdownMenuGroup>
-                <Link href="/profile">
+                <Link href="/settings">
                   <DropdownMenuItem className="flex cursor-pointer items-center gap-2">
                     <PersonIcon />
                     <span>Profile</span>

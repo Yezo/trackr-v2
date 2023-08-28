@@ -66,7 +66,7 @@ export const SignInForm = () => {
     if (res?.error === null) {
       form.reset()
       form.clearErrors()
-      router.push("/profile")
+      router.push("/dashboard")
     }
     //If there's an error, then display the error alert
     if (res?.error) {
@@ -78,15 +78,15 @@ export const SignInForm = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4 pb-6">
-            <h1 className="text-3xl font-light leading-none tracking-tight font-spectral ">
+            <h1 className="font-spectral text-3xl font-light leading-none tracking-tight ">
               Welcome back,
             </h1>
-            <p className="text-sm font-light leading-none tracking-tight font-spectral text-muted-foreground">
+            <p className="font-spectral text-sm font-light leading-none tracking-tight text-muted-foreground">
               Log in with your account details below.
             </p>
           </div>
           {emailInUseError && (
-            <p className="bg-red-600 py-2 text-white min-w-full text-xs flex gap-2 items-center justify-center rounded-md">
+            <p className="flex min-w-full items-center justify-center gap-2 rounded-md bg-red-600 py-2 text-xs text-white">
               <ExclamationTriangleIcon className="h-[1rem] w-[1rem]" />
               <span className="uppercase tracking-wider ">Wrong email or password.</span>
             </p>
@@ -99,7 +99,7 @@ export const SignInForm = () => {
                 <Input
                   placeholder="name@email.com"
                   type="email"
-                  className="placeholder:text-xs tracking-tight"
+                  className="tracking-tight placeholder:text-xs"
                   {...field}
                 />
               </FormFieldItem>
@@ -115,17 +115,17 @@ export const SignInForm = () => {
                   <Input
                     placeholder="********"
                     type={passwordVisiblity ? "text" : "password"}
-                    className="placeholder:text-xs tracking-tight"
+                    className="tracking-tight placeholder:text-xs"
                     {...field}
                   />
                   {passwordVisiblity ? (
                     <EyeNoneIcon
-                      className="-m-8 text-muted-foreground cursor-pointer"
+                      className="-m-8 cursor-pointer text-muted-foreground"
                       onClick={() => setPasswordVisiblity(!passwordVisiblity)}
                     />
                   ) : (
                     <EyeOpenIcon
-                      className="-m-8 text-muted-foreground cursor-pointer"
+                      className="-m-8 cursor-pointer text-muted-foreground"
                       onClick={() => setPasswordVisiblity(!passwordVisiblity)}
                     />
                   )}
@@ -135,7 +135,7 @@ export const SignInForm = () => {
           />
 
           {form.formState.isSubmitting ? (
-            <Button type="submit" className="min-w-full flex items-center gap-2" disabled>
+            <Button type="submit" className="flex min-w-full items-center gap-2" disabled>
               <UpdateIcon className="h-[1rem] w-[1rem] animate-spin" /> Sign In
             </Button>
           ) : (
@@ -146,7 +146,7 @@ export const SignInForm = () => {
 
           <Separator />
 
-          <span className="flex flex-col sm:flex-row items-center justify-center text-sm text-muted-foreground font-spectral tracking-tight">
+          <span className="flex flex-col items-center justify-center font-spectral text-sm tracking-tight text-muted-foreground sm:flex-row">
             Don't have an account?
             <LinkButton variant="link" href="/signup">
               Sign up
