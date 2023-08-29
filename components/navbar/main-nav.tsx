@@ -28,7 +28,7 @@ export const MainNav = () => {
         <div className="flex items-center gap-6">
           <Logo />
 
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <div className="flex items-center space-x-6 text-sm font-medium">
             <NavigationMenu className="font-normal">
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -88,7 +88,7 @@ export const MainNav = () => {
                 )}
 
                 <NavigationMenuItem>
-                  <Link href="/" passHref>
+                  <Link href="/" legacyBehavior passHref>
                     <NavigationMenuLink
                       className={`${navigationMenuTriggerStyle()} text-sm font-normal tracking-normal `}
                     >
@@ -98,7 +98,7 @@ export const MainNav = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-          </nav>
+          </div>
         </div>
 
         <ExternalLinks />

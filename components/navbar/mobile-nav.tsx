@@ -93,6 +93,7 @@ export const MobileNav = () => {
                               `block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`
                             )}
                             href={href}
+                            key="title"
                           >
                             <div className="flex items-center gap-2 text-sm font-normal leading-none">
                               <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
@@ -110,6 +111,7 @@ export const MobileNav = () => {
                               `block cursor-default select-none rounded-md p-2 leading-none no-underline outline-none grayscale transition-colors
  `
                             )}
+                            key="title"
                           >
                             <div className="flex items-center gap-2 text-sm font-normal leading-none">
                               <span className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
@@ -136,6 +138,7 @@ export const MobileNav = () => {
                                 `block select-none rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground`
                               )}
                               href={href}
+                              key="title"
                             >
                               <div className="flex items-center gap-2 text-sm font-normal leading-none">
                                 <div className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
@@ -153,6 +156,7 @@ export const MobileNav = () => {
                                 `block cursor-default select-none rounded-md p-2 leading-none no-underline outline-none grayscale transition-colors
  `
                               )}
+                              key="title"
                             >
                               <div className="flex items-center gap-2 text-sm font-normal leading-none">
                                 <span className="inline-flex rounded-full bg-blue-600 p-1.5 text-white shadow-sm">
