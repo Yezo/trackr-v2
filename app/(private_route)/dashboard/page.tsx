@@ -19,7 +19,11 @@ export default async function DashboardPage() {
 
       {data.fetchedJobApplications.length >= 1 ? (
         <>
-          <DataTable columns={columns} data={data.fetchedJobApplications} session={session} />
+          <DataTable
+            columns={columns}
+            data={data.fetchedJobApplications.reverse()}
+            session={session}
+          />
         </>
       ) : (
         <div className="grid min-h-[730px] w-full place-items-center rounded-xl border p-4">
