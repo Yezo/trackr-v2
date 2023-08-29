@@ -16,14 +16,12 @@ export const ChartContainer = ({ data }: ChartDataType) => {
       <div className="flex items-center px-[25px]">
         {currentChart.toLowerCase() === "bar" && <Title>Bar Chart</Title>}
         {currentChart.toLowerCase() === "pie" && <Title>Pie Chart</Title>}
-        {currentChart.toLowerCase() === "sankey" && <Title>Sankey Chart</Title>}
         <ChartToggle setCurrentChart={setCurrentChart} />
       </div>
 
       <section>
         {currentChart.toLowerCase() === "bar" && <BarChartComponent data={data} />}
         {currentChart.toLowerCase() === "pie" && <PieChartComponent data={data} />}
-        {currentChart.toLowerCase() === "sankey" && <SankeyChartComponent data={data} />}
       </section>
     </div>
   )
