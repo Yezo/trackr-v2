@@ -88,7 +88,7 @@ export const MainNav = () => {
                 )}
 
                 <NavigationMenuItem>
-                  <Link href="/docs" legacyBehavior passHref>
+                  <Link href="/" passHref>
                     <NavigationMenuLink
                       className={`${navigationMenuTriggerStyle()} text-sm font-normal tracking-normal `}
                     >
