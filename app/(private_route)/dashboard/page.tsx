@@ -8,7 +8,6 @@ import { HomeHeader } from "@/components/layout/home-header"
 import { getData } from "@/lib/utils"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { Suspense } from "react"
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)

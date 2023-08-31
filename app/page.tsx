@@ -42,7 +42,7 @@ export default async function Home() {
             <div className="group relative">
               <div className="animate-tilt absolute -inset-1 rounded-lg bg-gradient-to-bl from-blue-600 to-blue-400 opacity-50 blur transition duration-1000 group-hover:opacity-80 group-hover:duration-200 dark:from-blue-600 dark:to-blue-200"></div>
               <Image
-                src="/dashboard.png"
+                src="/dashboard.webp"
                 height={1100}
                 width={1100}
                 className="relative rounded-xl object-cover "
